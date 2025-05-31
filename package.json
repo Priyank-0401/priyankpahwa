@@ -1,5 +1,5 @@
 {
-  "name": "priyank-portfolio",
+   "name": "priyank-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,10 +9,6 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:analyze": "vite build --mode analyze",
-    "serve": "vite preview --port 4173",
-    "deploy:vercel": "npm run build && vercel --prod",
-    "deploy:netlify": "npm run build && netlify deploy --prod --dir=dist",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
 
