@@ -38,7 +38,7 @@ const Contact = () => {
         // For now, just create a mailto link with the form data
       const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
       const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-      window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:priyankpahwa41@gmail.com?subject=${subject}&body=${body}`;
       
       setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent.' });
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -51,7 +51,7 @@ const Contact = () => {
       icon: Mail,
       title: "Email",
       value: "contact@example.com",
-      href: "mailto:contact@example.com",
+      href: "mailto:priyankpahwa41@gmail.com",
       description: "Best for project inquiries",
       response: "Preferred contact"
     },
