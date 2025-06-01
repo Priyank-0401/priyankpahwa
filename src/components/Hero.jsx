@@ -36,23 +36,22 @@ const Hero = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
   const socialLinks = [
     { 
       icon: Github, 
-      href: 'https://github.com/Priyank-0401', 
+      href: 'https://github.com/username', 
       label: 'GitHub',
       color: 'hover:bg-gray-700'
     },
     { 
       icon: Linkedin, 
-      href: 'https://linkedin.com/in/priyankpahwa41', 
+      href: 'https://linkedin.com/in/username', 
       label: 'LinkedIn',
       color: 'hover:bg-blue-600'
     },
     { 
       icon: Mail, 
-      href: 'mailto:priyankpahwa41@gmail.com', 
+      href: 'mailto:contact@example.com', 
       label: 'Email',
       color: 'hover:bg-red-600'
     },
@@ -97,15 +96,14 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-        >
-          {/* Main heading */}
+        >          {/* Main heading */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.8 }}
             className="text-5xl md:text-7xl font-bold mb-6 text-white"
           >
-            Priyank Pahwa
+            Hi, I'm Priyank
           </motion.h1>
 
           {/* Dynamic role display */}
@@ -147,18 +145,16 @@ const Hero = () => {
                 <p className="text-gray-300 text-sm font-medium">{highlight.text}</p>
               </motion.div>
             ))}
-          </motion.div>
-
-          {/* Description */}
+          </motion.div>          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            Passionate 3rd-year Computer Science student at Manipal University Jaipur with hands-on experience in 
+            3rd-year Computer Science student at Manipal University Jaipur with hands-on experience in 
             blockchain development, Web3 technologies, IoT systems, and AI/ML. Building innovative solutions 
-            that bridge the gap between cutting-edge technology and real-world applications.
+            that bridge cutting-edge technology and real-world applications.
           </motion.p>
 
           {/* Social Links */}
@@ -206,10 +202,9 @@ const Hero = () => {
               className="border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200"
             >
               View My Work
-            </motion.button>
-            <motion.a
+            </motion.button>            <motion.a
               href="/resume.pdf"
-              download="Priyank_Pahwa_Resume.pdf"
+              download="Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 border border-gray-700 hover:border-gray-600"

@@ -40,8 +40,7 @@ const Header = () => {
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
+        <div className="flex items-center justify-between">          {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
@@ -60,11 +59,10 @@ const Header = () => {
               >
                 {item.name}
               </motion.button>
-            ))}
-              {/* Resume Download Button */}
+            ))}            {/* Resume Download Button */}
             <motion.a
               href="/resume.pdf"
-              download="Priyank_Pahwa_Resume.pdf"
+              download="Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
@@ -106,7 +104,7 @@ const Header = () => {
             ))}            <div className="px-4 pt-4">
               <a
                 href="/resume.pdf"
-                download="Priyank_Pahwa_Resume.pdf"
+                download="Resume.pdf"
                 className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 w-full justify-center"
               >
                 <Download size={16} />

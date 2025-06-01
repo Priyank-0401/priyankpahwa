@@ -1,4 +1,4 @@
-# Priyank Pahwa - Portfolio Website
+# Portfolio Website
 
 A modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion.
 
@@ -70,7 +70,7 @@ src/
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd priyank-portfolio
+cd portfolio
 
 # Install dependencies
 npm install
@@ -132,7 +132,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ by Priyank Pahwa**+ Vite
+**Built with ❤️ by the developer**
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

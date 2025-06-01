@@ -13,20 +13,18 @@ import Analytics from './components/Analytics';
 function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <div className="bg-gray-900 text-white">
-        <Header />
-        
-        <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Skills />
-          <Projects />
-          <Contact />
-        </main>
-        
-        <Footer />
-      </div>
+      <Header />
+      
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      
+      <Footer />
     </div>
   );
 }

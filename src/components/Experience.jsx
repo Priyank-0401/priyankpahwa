@@ -40,7 +40,7 @@ const Experience = () => {
       institution: "Blue Bells Model School",
       degree: "Higher Secondary Certificate (12th)",
       field: "Science Stream (PCM)",
-      duration: "2020 - 2022",
+      duration: "2021 - 2022",
       location: "India",
       status: "Completed with Distinction",
       description: "Strong foundation in mathematics and sciences leading to engineering",
@@ -54,12 +54,9 @@ const Experience = () => {
       gpa: "Distinction Grade"
     }
   ];
-
   const skills = [
     { name: "Blockchain Development", level: 85, icon: Globe },
-    { name: "Web3 Technologies", level: 80, icon: Code },
     { name: "IoT Systems", level: 75, icon: Cpu },
-    { name: "Smart Contracts", level: 80, icon: Award },
     { name: "Full-Stack Development", level: 85, icon: Briefcase },
     { name: "AI/ML Applications", level: 70, icon: Lightbulb }
   ];

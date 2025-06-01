@@ -1,6 +1,6 @@
-# Priyank Pahwa - Portfolio Website
+# Portfolio Website
 
-A modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion, showcasing Priyank Pahwa's skills as a Blockchain & Web3 Developer, Software Engineer, and AI Enthusiast.
+A modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion, showcasing skills as a developer.
 
 ## 🚀 Features
 
@@ -24,7 +24,7 @@ A modern, responsive portfolio website built with React, Tailwind CSS, and Frame
 ## 📁 Project Structure
 
 ```
-priyank-portfolio/
+portfolio/
 ├── public/
 │   ├── resume.pdf              # Resume PDF file
 │   └── vite.svg               # Favicon
@@ -56,9 +56,8 @@ priyank-portfolio/
 ### Installation
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/priyankpahwa/portfolio.git
-   cd priyank-portfolio
+   ```bash   git clone https://github.com/username/portfolio.git
+   cd portfolio
    ```
 
 2. **Install dependencies**
@@ -215,15 +214,15 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/priyankpahwa/portfolio/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/username/portfolio/issues).
 
 ## 📞 Support
 
 If you have any questions or need help with setup:
-- Email: priyankpahwa.dev@gmail.com
-- LinkedIn: [priyankpahwa](https://linkedin.com/in/priyankpahwa)
-- GitHub: [priyankpahwa](https://github.com/priyankpahwa)
+- Email: developer.email@example.com
+- LinkedIn: [username](https://linkedin.com/in/username)
+- GitHub: [username](https://github.com/username)
 
 ---
 
-**Built with ❤️ by Priyank Pahwa**
+**Built with ❤️ by the developer**

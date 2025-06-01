@@ -121,28 +121,27 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
-          >
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
-              <h3 className="text-3xl font-bold mb-4 text-white">Priyank Pahwa</h3>
+          >            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+              
               <p className="text-xl text-blue-400 font-semibold mb-6">
                 Blockchain Developer | Web3 Engineer | Software Developer
               </p>
               <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p>
                   🎓 <strong className="text-blue-400">Computer Science Engineering student</strong> at Manipal University Jaipur 
-                  with an unwavering passion for emerging technologies and innovative problem-solving.
+                  with passion for emerging technologies and innovative problem-solving.
                 </p>
                 <p>
                   🚀 Specialized in <strong className="text-blue-400">blockchain development, Web3 technologies, IoT systems, and AI/ML</strong>, 
-                  with hands-on experience building production-ready applications that bridge the digital divide.
+                  with hands-on experience building production-ready applications.
                 </p>
                 <p>
                   💡 Focused on creating <strong className="text-blue-400">decentralized applications and smart contract solutions</strong> 
-                  that democratize access to technology and create meaningful impact in everyday life.
+                  that democratize access to technology and create meaningful impact.
                 </p>
                 <p>
                   🌟 Currently exploring the convergence of <strong className="text-blue-400">AI and blockchain technologies</strong> to build 
-                  next-generation applications that leverage intelligent automation and decentralized architecture.
+                  next-generation applications with intelligent automation and decentralized architecture.
                 </p>
               </div>
             </div>
@@ -212,9 +211,7 @@ const About = () => {
               </motion.div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Mission Statement */}
+        </motion.div>        {/* Mission Statement */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -230,9 +227,8 @@ const About = () => {
                 To harness the transformative power of <span className="text-blue-400 font-semibold">blockchain technology</span>, 
                 <span className="text-green-400 font-semibold"> artificial intelligence</span>, and 
                 <span className="text-purple-400 font-semibold"> innovative software development</span> to create solutions that 
-                democratize access to technology, solve real-world problems, and contribute to a more connected and equitable digital future. 
-                I believe that through continuous learning, collaborative innovation, and ethical development practices, 
-                we can build technology that truly serves humanity.
+                democratize access to technology and solve real-world problems. Through continuous learning, collaborative innovation, 
+                and ethical development practices, I aim to build technology that truly serves humanity.
               </p>
             </div>
           </div>

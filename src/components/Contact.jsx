@@ -35,11 +35,10 @@ const Contact = () => {
     try {
       // Simulate form submission (replace with actual API call)
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For now, just create a mailto link with the form data
+        // For now, just create a mailto link with the form data
       const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
       const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-      window.location.href = `mailto:priyankpahwa41@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:contact@example.com?subject=${subject}&body=${body}`;
       
       setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent.' });
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -48,12 +47,11 @@ const Contact = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };  const contactInfo = [
-    {
+  };  const contactInfo = [    {
       icon: Mail,
       title: "Email",
-      value: "priyankpahwa41@gmail.com",
-      href: "mailto:priyankpahwa41@gmail.com",
+      value: "contact@example.com",
+      href: "mailto:contact@example.com",
       description: "Best for project inquiries",
       response: "Preferred contact"
     },
@@ -74,7 +72,6 @@ const Contact = () => {
       response: "IST timezone"
     }
   ];
-
   const socialLinks = [
     {
       icon: Github,
@@ -116,14 +113,10 @@ const Contact = () => {
       label: "Focused",
       description: "Committed to excellence"
     }
-  ];
-  const preferredTopics = [
-    { title: "Web Development", icon: "🌐", description: "React, Next.js, Full-stack solutions" },
-    { title: "SaaS Products", icon: "💼", description: "Software as a Service platforms" },
-    { title: "API Development", icon: "🔗", description: "RESTful APIs and integrations" },
-    { title: "Consulting", icon: "💡", description: "Technical consulting and mentoring" },
-    { title: "Blockchain", icon: "⛓️", description: "Smart contracts and Web3 applications" },
-    { title: "AI Integration", icon: "🤖", description: "AI-powered features and solutions" }
+  ];  const preferredTopics = [
+    { title: "Web Development", icon: "🌐", description: "Full-stack web applications" },
+    { title: "Consulting", icon: "💡", description: "Technical guidance and mentoring" },
+    { title: "Collaboration", icon: "🤝", description: "Open source and team projects" }
   ];
   return (
     <section id="contact" className="py-20 bg-gray-900">
@@ -135,10 +128,9 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Let's Build Something <span className="text-blue-400">Amazing</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Ready to turn your ideas into reality? I'm here to help you create exceptional digital experiences.
+            Get In <span className="text-blue-400">Touch</span>
+          </h2>          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+            Have a project in mind? Let's discuss how we can work together.
           </p>
           
           {/* Contact Stats */}
@@ -177,13 +169,10 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="lg:col-span-1 space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-bold mb-6 text-white">Let's Connect</h3>
+          >            <div>
+              <h3 className="text-2xl font-bold mb-6 text-white">Contact Information</h3>
               <p className="text-gray-300 mb-8 leading-relaxed">
-                I'm always excited to discuss new opportunities, innovative projects, 
-                and potential collaborations. Whether you're looking for a skilled developer 
-                or have an interesting challenge to solve, let's start a conversation!
+                Ready to collaborate? Reach out through any of the channels below.
               </p>
             </div>
 
@@ -197,7 +186,7 @@ const Contact = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex items-center space-x-4 p-4 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl hover:border-blue-500/50 hover:bg-gray-800/70 transition-all duration-300 group block"
+                  className="flex items-center space-x-4 p-4 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl hover:border-blue-500/50 hover:bg-gray-800/70 transition-all duration-300 group"
                 >
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:bg-blue-600/30 transition-colors duration-300">
@@ -419,11 +408,10 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-16"
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold mb-4 text-white">What I Can Help You With</h3>
+        >          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold mb-4 text-white">How I Can Help</h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              I specialize in various types of projects and would love to discuss how I can bring value to yours.
+              Areas where I can contribute to your project.
             </p>
           </div>
           
@@ -446,56 +434,7 @@ const Contact = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-16 text-center bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8"
-        >
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4 text-white">Ready to Start Your Project?</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              I'm passionate about creating digital solutions that make a difference. 
-              Whether you have a clear vision or just an idea, let's discuss how we can bring it to life together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => document.querySelector('#contact form').scrollIntoView({ behavior: 'smooth' })}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/25"
-              >
-                Start a Conversation
-              </motion.button>
-              <motion.a
-                href={`mailto:priyankpahwa41@gmail.com?subject=Quick Question&body=Hi Priyank,%0D%0A%0D%0AI have a quick question about...`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gray-700 hover:bg-gray-600 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 border border-gray-600 hover:border-gray-500"
-              >
-                Quick Email
-              </motion.a>
-            </div>
-            <div className="mt-6 flex items-center justify-center space-x-6 text-sm text-gray-400">
-              <div className="flex items-center space-x-2">
-                <CheckCircle className="w-4 h-4 text-green-400" />
-                <span>Free consultation</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-blue-400" />
-                <span>Flexible scheduling</span>
-              </div>              <div className="flex items-center space-x-2">
-                <MessageSquare className="w-4 h-4 text-purple-400" />
-                <span>Quick response</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          </div>        </motion.div>
       </div>
     </section>
   );
