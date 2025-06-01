@@ -35,7 +35,7 @@ const Footer = () => {
       external: true
     },    {
       icon: Mail,
-      href: 'mailto:contact@example.com',
+      href: 'mailto:priyankpahwa41@gmail.com',
       label: 'Email',
       color: 'hover:bg-red-600',
       external: false
