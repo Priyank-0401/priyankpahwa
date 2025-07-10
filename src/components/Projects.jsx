@@ -24,85 +24,67 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Blockchain-Based Local Transaction Web App",
-      description: "A comprehensive decentralized application (DApp) built using Ethereum blockchain and Ganache for local development. Features smart contract deployment, MetaMask wallet connectivity, and secure transaction management with complete frontend and backend integration.",
-      detailedDescription: "This project demonstrates expertise in blockchain development by creating a full-stack DApp that enables secure, transparent local transactions. The application uses Solidity for smart contracts, Web3.js for blockchain interaction, and React for the user interface. Users can connect their MetaMask wallets, view transaction history, and execute secure transfers with real-time updates.",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=300&fit=crop&auto=format",      technologies: ["Solidity", "Web3.js", "Ethereum", "React", "Node.js", "Ganache", "MetaMask"],
-      category: "blockchain",
-      icon: Shield,
-      github: "https://github.com/username",
-      demo: "#",
-      status: "completed",
-      date: "2025",
-      highlights: [
-        "Smart contract development and deployment",
-        "MetaMask wallet integration",
-        "Real-time transaction monitoring",
-        "Secure data handling and validation"
-      ],
-      impact: "Enhanced understanding of decentralized finance and blockchain architecture"
-    },
-    {
-      id: 2,
-      title: "Smart Carton Inventory System",
-      description: "An innovative IoT-enabled web application designed for pharmaceutical supply chain management using advanced barcode and NFC technology. Provides comprehensive real-time inventory tracking, supply chain transparency, and detailed analytics dashboard.",
-      detailedDescription: "This system revolutionizes pharmaceutical inventory management by combining IoT sensors, NFC technology, and barcode scanning to create a comprehensive tracking solution. The application monitors carton movement, validates authenticity, and provides real-time updates on inventory levels with advanced analytics for decision-making.",
-      image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&h=300&fit=crop&auto=format",      technologies: ["IoT", "Node.js", "MongoDB", "React", "NFC", "Barcode Scanner", "Express.js", "Socket.io"],
-      category: "iot",
-      icon: Cpu,
-      github: "https://github.com/username",
-      demo: "#",
-      status: "completed",
-      date: "2025",
-      highlights: [
-        "NFC and barcode integration",
-        "Real-time inventory tracking",
-        "Supply chain transparency",
-        "Advanced analytics dashboard"
-      ],
-      impact: "Improved pharmaceutical traceability and inventory management efficiency"
-    },
-    {
-      id: 3,
-      title: "AI Wellness Companion",
-      description: "An advanced wellness-focused web application featuring cutting-edge 3D avatar interactions, sophisticated voice and text chat capabilities, emotion detection algorithms, mood tracking systems, journaling features, and guided relaxation tools for comprehensive mental health support.",
-      detailedDescription: "This innovative project combines AI, machine learning, and 3D graphics to create a personalized wellness companion. The application uses emotion detection algorithms to understand user mood, provides intelligent responses through natural language processing, and offers guided meditation and relaxation techniques through an interactive 3D avatar interface.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=300&fit=crop&auto=format",      technologies: ["React", "AI/ML", "3D Graphics", "Voice API", "Emotion AI", "TensorFlow", "Three.js", "NLP"],
+      title: "AI Wellness Companion (3D Emotional Assistant)",
+      description: "A 3D AI-powered wellness platform featuring an expressive avatar that offers emotional support, intelligent chat, journaling, and guided relaxation tools.",
+      detailedDescription: "The AI Wellness Companion blends AI and 3D technology to deliver a personalized digital wellness experience. Through real-time emotion detection, voice and text conversation, and interactive journaling, it promotes mindfulness and mental health. The avatar responds with realistic expressions and synced voice output using Azure TTS and Groq-powered NLP, all built in a custom React + Node.js stack.",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=300&fit=crop&auto=format",
+      technologies: ["React", "AI/ML", "3D Graphics", "Voice API", "Emotion AI", "TensorFlow", "Three.js", "NLP"],
       category: "ai",
       icon: Brain,
-      github: "https://github.com/username",
+      github: "https://github.com/Priyank-0401/AI-Companion",
       demo: "#",
       status: "wip",
       date: "2025 - Present",
       highlights: [
-        "3D avatar with realistic interactions",
-        "Emotion detection and mood analysis",
-        "Voice and text conversation AI",
-        "Personalized wellness recommendations"
+        "Built 3D avatar with lip-sync and emotion-driven animations",
+        "Integrated real-time text and voice-based chat AI",
+        "Implemented journaling and wellness tools using React",
+        "Deployed emotion detection and mood-based response system"
       ],
-      impact: "Advancing mental health technology through AI-powered personalized support"
+      impact: "Empowering mental wellness through personalized, AI-enhanced support"
     },
     {
-      id: 4,
-      title: "DeFi Portfolio Tracker",
-      description: "Comprehensive decentralized finance portfolio management tool with real-time tracking of multiple blockchain networks, yield farming opportunities, and automated strategy recommendations.",
-      detailedDescription: "A sophisticated DeFi dashboard that aggregates data from multiple blockchain networks to provide users with a complete view of their decentralized finance investments. Features include yield farming optimization, liquidity pool analysis, and risk assessment tools.",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=300&fit=crop&auto=format",
-      technologies: ["Web3.js", "React", "Node.js", "GraphQL", "DeFi Protocols", "Ethereum", "Polygon"],
-      category: "blockchain",
-      icon: Database,
-      github: "https://github.com/username",
+      id: 2,
+      title: "PharmaFleet: Smart Carton Inventory System",
+      description: "A real-time pharmaceutical inventory platform leveraging IoT, barcode, and NFC technologies to deliver supply chain transparency, smart tracking, and analytics.",
+      detailedDescription: "PharmaFleet is an intelligent inventory management system tailored for the pharmaceutical industry. It integrates IoT sensors, NFC tags, and barcode scanning with a React frontend and Node.js backend. The system tracks medicine cartons in real-time, verifies product authenticity, and powers analytics dashboards to support supply chain decisions and traceability.",
+      image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&h=300&fit=crop&auto=format",
+      technologies: ["IoT", "Node.js", "MongoDB", "React", "NFC", "Barcode Scanner", "Express.js", "Socket.io"],
+      category: "iot",
+      icon: Cpu,
+      github: "https://github.com/Priyank-0401/Inventory-Management",
       demo: "#",
-      status: "concept",
-      date: "2024 - Future",
+      status: "wip",
+      date: "2025 - Present",
       highlights: [
-        "Multi-chain portfolio tracking",
-        "Yield farming optimization",
-        "Risk assessment algorithms",
-        "Automated strategy recommendations"
+        "Integrated NFC and barcode technologies for item-level tracking",
+        "Built real-time communication via Socket.io",
+        "Created interactive dashboard for inventory analysis",
+        "Enhanced pharmaceutical traceability through smart carton tracking"
       ],
-      impact: "Simplifying DeFi investment management for mainstream adoption"
-    }
+      impact: "Revolutionized pharma supply chains with intelligent, sensor-driven visibility"
+    },
+    {
+      id: 3,
+      title: "WePay: Blockchain-Powered Local Transactions",
+      description: "A full-stack decentralized application (DApp) built on Ethereum and Ganache, enabling secure, real-time local transactions with MetaMask integration and smart contract automation.",
+      detailedDescription: "WePay is a robust blockchain solution that demonstrates hands-on experience in decentralized finance. It combines Solidity smart contracts with a React frontend and Node.js backend, enabling users to connect MetaMask wallets, manage funds, and track transaction history in real-time using Web3.js. Built for local deployment with Ganache, it offers a sandbox for exploring real-world DeFi concepts.",
+      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=300&fit=crop&auto=format",
+      technologies: ["Solidity", "Web3.js", "Ethereum", "React", "Node.js", "Ganache", "MetaMask"],
+      category: "blockchain",
+      icon: Shield,
+      github: "https://github.com/Priyank-0401/wepay-crypto",
+      demo: "#",
+      status: "completed",
+      date: "2025",
+      highlights: [
+        "Developed and deployed secure smart contracts on Ethereum",
+        "Integrated MetaMask for user wallet connectivity",
+        "Implemented real-time transaction monitoring via Web3.js",
+        "Ensured robust validation and secure backend operations"
+      ],
+      impact: "Strengthened expertise in blockchain development and DeFi system architecture"
+    }   
   ];
 
   const filters = [
@@ -320,7 +302,7 @@ const Projects = () => {
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { label: "Total Projects", value: "4", icon: Zap, color: "text-blue-400" },
+              { label: "Total Projects", value: "3", icon: Zap, color: "text-blue-400" },
               { label: "Technologies", value: "20+", icon: Code2, color: "text-green-400" },
               { label: "GitHub Repos", value: "15+", icon: GitBranch, color: "text-purple-400" },
               { label: "Lines of Code", value: "10K+", icon: Database, color: "text-orange-400" }

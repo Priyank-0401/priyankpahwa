@@ -50,7 +50,7 @@ const Contact = () => {
   };  const contactInfo = [    {
       icon: Mail,
       title: "Email",
-      value: "contact@example.com",
+      value: "priyankpahwa41@gmail.com",
       href: "mailto:priyankpahwa41@gmail.com",
       description: "Best for project inquiries",
       response: "Preferred contact"
