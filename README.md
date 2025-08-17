@@ -2,9 +2,6 @@
 
 A modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion.
 
-## 🚀 Live Demo
-The portfolio is currently running at: http://localhost:5174/
-
 ## ✨ Features
 
 - **Modern Design**: Clean and professional UI with gradient accents
