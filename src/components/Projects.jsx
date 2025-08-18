@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ExternalLink, 
@@ -20,18 +21,22 @@ import {
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [hoveredProjectId, setHoveredProjectId] = useState(null);
+  const [hoverRect, setHoverRect] = useState(null);
+  const hoverTimeoutRef = useRef(null);
 
   const projects = [
     {
       id: 1,
       title: "AI Wellness Companion (3D Emotional Assistant)",
-      description: "A 3D AI-powered wellness platform featuring an expressive avatar that offers emotional support, intelligent chat, journaling, and guided relaxation tools.",
+      description: "3D AI wellness companion with expressive avatar, emotional support, journaling, and guided relaxation.",
       detailedDescription: "The AI Wellness Companion blends AI and 3D technology to deliver a personalized digital wellness experience. Through real-time emotion detection, voice and text conversation, and interactive journaling, it promotes mindfulness and mental health. The avatar responds with realistic expressions and synced voice output using Azure TTS and Groq-powered NLP, all built in a custom React + Node.js stack.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=300&fit=crop&auto=format",
+      image: `${import.meta.env.BASE_URL}Seriva.png`,
+      previewGif: "",
       technologies: ["React", "AI/ML", "3D Graphics", "Voice API", "Emotion AI", "TensorFlow", "Three.js", "NLP"],
       category: "ai",
       icon: Brain,
-      github: "https://github.com/Priyank-0401/AI-Companion",
+      github: "https://github.com/Priyank-0401/Seriva-Showcase",
       demo: "#",
       status: "wip",
       date: "2025 - Present",
@@ -46,9 +51,10 @@ const Projects = () => {
     {
       id: 2,
       title: "PharmaFleet: Smart Carton Inventory System",
-      description: "A real-time pharmaceutical inventory platform leveraging IoT, barcode, and NFC technologies to deliver supply chain transparency, smart tracking, and analytics.",
+      description: "Real-time pharma inventory with IoT, NFC/barcode, smart tracking, and analytics.",
       detailedDescription: "PharmaFleet is an intelligent inventory management system tailored for the pharmaceutical industry. It integrates IoT sensors, NFC tags, and barcode scanning with a React frontend and Node.js backend. The system tracks medicine cartons in real-time, verifies product authenticity, and powers analytics dashboards to support supply chain decisions and traceability.",
-      image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&h=300&fit=crop&auto=format",
+      image: `${import.meta.env.BASE_URL}PharmaFleet.png`,
+      previewGif: "",
       technologies: ["IoT", "Node.js", "MongoDB", "React", "NFC", "Barcode Scanner", "Express.js", "Socket.io"],
       category: "iot",
       icon: Cpu,
@@ -67,9 +73,10 @@ const Projects = () => {
     {
       id: 3,
       title: "WePay: Blockchain-Powered Local Transactions",
-      description: "A full-stack decentralized application (DApp) built on Ethereum and Ganache, enabling secure, real-time local transactions with MetaMask integration and smart contract automation.",
+      description: "Full-stack DApp on Ethereum/Ganache with MetaMask, secure transactions, and smart contracts.",
       detailedDescription: "WePay is a robust blockchain solution that demonstrates hands-on experience in decentralized finance. It combines Solidity smart contracts with a React frontend and Node.js backend, enabling users to connect MetaMask wallets, manage funds, and track transaction history in real-time using Web3.js. Built for local deployment with Ganache, it offers a sandbox for exploring real-world DeFi concepts.",
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=300&fit=crop&auto=format",
+      image: `${import.meta.env.BASE_URL}WePay.png`,
+      previewGif: "",
       technologies: ["Solidity", "Web3.js", "Ethereum", "React", "Node.js", "Ganache", "MetaMask"],
       category: "blockchain",
       icon: Shield,
@@ -89,14 +96,16 @@ const Projects = () => {
 
   const filters = [
     { key: 'all', label: 'All Projects', icon: Globe, count: projects.length },
-    { key: 'blockchain', label: 'Blockchain', icon: Shield, count: projects.filter(p => p.category === 'blockchain').length },
+    { key: 'ai', label: 'AI/ML', icon: Brain, count: projects.filter(p => p.category === 'ai').length },
     { key: 'iot', label: 'IoT', icon: Cpu, count: projects.filter(p => p.category === 'iot').length },
-    { key: 'ai', label: 'AI/ML', icon: Brain, count: projects.filter(p => p.category === 'ai').length }
+    { key: 'blockchain', label: 'Blockchain', icon: Shield, count: projects.filter(p => p.category === 'blockchain').length }
   ];
 
   const filteredProjects = activeFilter === 'all'
     ? projects 
     : projects.filter(project => project.category === activeFilter);
+
+  const hoveredProject = projects.find(p => p.id === hoveredProjectId);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -178,9 +187,52 @@ const Projects = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 group"
+                whileHover={{ y: -6 }}
+                onMouseEnter={(e) => {
+                  if (hoverTimeoutRef.current) {
+                    clearTimeout(hoverTimeoutRef.current);
+                    hoverTimeoutRef.current = null;
+                  }
+                  setHoveredProjectId(project.id);
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setHoverRect({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
+                }}
+                onMouseMove={(e) => {
+                  if (hoveredProjectId === project.id) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setHoverRect((prev) => {
+                      const next = { top: rect.top, left: rect.left, width: rect.width, height: rect.height };
+                      return (!prev || prev.top !== next.top || prev.left !== next.left || prev.width !== next.width || prev.height !== next.height) ? next : prev;
+                    });
+                  }
+                }}
+                onMouseLeave={() => {
+                  hoverTimeoutRef.current = setTimeout(() => {
+                    setHoveredProjectId((prev) => (prev === project.id ? null : prev));
+                    setHoverRect(null);
+                  }, 120);
+                }}
+                className="relative bg-gray-900 border border-gray-700 rounded-2xl hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 group"
               >
+                {/* Media Preview */}
+                <div className="relative h-48 md:h-56 w-full overflow-hidden rounded-t-2xl">
+                  <motion.img
+                    src={(project.previewGif && project.previewGif.length > 0) ? project.previewGif : project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    initial={{ scale: 1, opacity: 0.9 }}
+                    animate={{ opacity: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="h-full w-full object-cover will-change-transform"
+                  />
+                  {/* Gradient overlays */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
+                  {/* Glow ring on hover */}
+                  <div className="pointer-events-none absolute -inset-px rounded-t-2xl ring-1 ring-white/5 group-hover:ring-blue-500/30 transition duration-300" />
+                </div>
+
                 {/* Project Header with Icon and Status */}
                 <div className="relative p-6 bg-gradient-to-br from-gray-800 to-gray-900">
                   <div className="flex items-start justify-between mb-4">
@@ -191,7 +243,7 @@ const Projects = () => {
                         project.category === 'ai' ? 'bg-purple-500/20 text-purple-400' :
                         'bg-green-500/20 text-green-400'
                       }`}>
-                        <project.icon size={24} />
+                        {React.createElement(project.icon, { size: 24 })}
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
@@ -201,6 +253,7 @@ const Projects = () => {
                           <Calendar size={14} className="text-gray-400" />
                           <span className="text-gray-400 text-sm">{project.date}</span>
                         </div>
+
                       </div>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
@@ -208,7 +261,7 @@ const Projects = () => {
                     </span>
                   </div>
                   
-                  <p className="text-gray-300 leading-relaxed mb-6">
+                  <p className="text-gray-300 leading-relaxed mb-6 whitespace-nowrap overflow-hidden text-ellipsis">
                     {project.description}
                   </p>
 
@@ -249,20 +302,31 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex space-x-3">
+                  {/* Action Buttons (reveal on hover) */}
+                  <div className="flex space-x-3 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     <motion.a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center space-x-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 border border-gray-600 hover:border-gray-500"
+                      className="flex items-center space-x-2 bg-gray-700/80 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 border border-gray-600 hover:border-gray-500"
                     >
                       <Github size={16} />
-                      <span>View Code</span>
+                      <span>Code</span>
                     </motion.a>
-                
+
+                    <motion.a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                    >
+                      <ExternalLink size={16} />
+                      <span>Demo</span>
+                    </motion.a>
 
                     <motion.button
                       onClick={() => setSelectedProject(project)}
@@ -284,6 +348,8 @@ const Projects = () => {
                     <p className="text-gray-300 text-sm">{project.impact}</p>
                   </div>
                 </div>
+
+                {/* (Popup moved to portal at root) */}
               </motion.div>
             ))}
           </AnimatePresence>
@@ -332,6 +398,132 @@ const Projects = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Global hover popup portal (desktop only) */
+      /* Backdrop remains fixed; popup is positioned above hovered card using hoverRect */}
+      {typeof document !== 'undefined' && createPortal(
+        (
+          <AnimatePresence>
+            {hoveredProject && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  key={`backdrop-global-${hoveredProject.id}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="hidden md:block fixed inset-0 z-[9998] bg-black/50 backdrop-blur-md pointer-events-none"
+                />
+                {/* Popup aligned to hovered card (fixed position, above backdrop) */}
+                {(hoverRect || hoveredProject) && (
+                  <motion.div
+                    key={`popup-global-${hoveredProject.id}`}
+                    initial={{ opacity: 0, y: -12, scale: 0.96, filter: 'blur(6px)' }}
+                    animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -10, scale: 0.97, filter: 'blur(4px)' }}
+                    transition={{ type: 'spring', stiffness: 240, damping: 20, mass: 0.9 }}
+                    className="hidden md:block fixed z-[2147483647] pointer-events-auto"
+                    onMouseEnter={() => {
+                      if (hoverTimeoutRef.current) {
+                        clearTimeout(hoverTimeoutRef.current);
+                        hoverTimeoutRef.current = null;
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      hoverTimeoutRef.current = setTimeout(() => {
+                        setHoveredProjectId(null);
+                        setHoverRect(null);
+                      }, 120);
+                    }}
+                    style={{
+                      top: hoverRect ? hoverRect.top : 100,
+                      left: hoverRect ? hoverRect.left : 24,
+                      width: hoverRect ? hoverRect.width : 520
+                    }}
+                  >
+                    <div className="rounded-2xl border border-slate-700 bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-black/50">
+                      <div className="p-6 md:p-8 max-h-[85vh] overflow-hidden">
+                        <div className="flex items-start justify-between gap-4 mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-11 h-11 rounded-lg flex items-center justify-center ${
+                              hoveredProject.category === 'blockchain' ? 'bg-blue-500/20 text-blue-300' :
+                              hoveredProject.category === 'iot' ? 'bg-orange-500/20 text-orange-300' :
+                              hoveredProject.category === 'ai' ? 'bg-purple-500/20 text-purple-300' :
+                              'bg-green-500/20 text-green-300'
+                            }`}>
+                              {React.createElement(hoveredProject.icon, { size: 22 })}
+                            </div>
+                            <div>
+                              <h3 className="text-2xl font-bold text-white leading-tight">{hoveredProject.title}</h3>
+                              <div className="flex items-center gap-2 text-slate-400 text-sm mt-1">
+                                <Calendar size={14} />
+                                <span>{hoveredProject.date}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${getStatusColor(hoveredProject.status)}`}>
+                            {getStatusLabel(hoveredProject.status)}
+                          </span>
+                        </div>
+
+                        {/* Popup Media (full image, natural height) */}
+                        <div className="mb-6 -mt-1 overflow-hidden">
+                          <div className="relative w-full flex items-center justify-center">
+                            <motion.img
+                              src={hoveredProject.image}
+                              alt={`${hoveredProject.title} preview`}
+                              className="w-full h-auto max-h-[60vh] object-contain"
+                              initial={{ opacity: 0, scale: 0.985 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.25, ease: 'easeOut' }}
+                            />
+                            
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+                          <div className="md:col-span-2">
+                            <h4 className="text-[12px] font-semibold tracking-wider text-slate-400 uppercase mb-2">What it is</h4>
+                            <p className="text-slate-200/95 leading-relaxed">
+                              {hoveredProject.detailedDescription}
+                            </p>
+
+                            <h4 className="mt-6 text-[12px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Value / Impact</h4>
+                            <p className="text-slate-300/90 leading-relaxed">
+                              {hoveredProject.impact}. Designed to scale, impress stakeholders, and accelerate development cycles through clean architecture and compelling UX.
+                            </p>
+                          </div>
+                          <div>
+                            <h4 className="text-[12px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Tech Stack</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {hoveredProject.technologies.map((tech) => (
+                                <span key={tech} className="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800/70 border border-slate-700 text-slate-200">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+
+                            <h4 className="mt-6 text-[12px] font-semibold tracking-wider text-slate-400 uppercase mb-2">Highlights</h4>
+                            <ul className="space-y-2">
+                              {hoveredProject.highlights.map((h, i) => (
+                                <li key={i} className="flex items-start gap-2 text-slate-200">
+                                  <Star size={14} className="mt-0.5 text-yellow-400" />
+                                  <span className="leading-snug text-sm">{h}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </>
+            )}
+          </AnimatePresence>
+        ), document.body)
+      }
     </section>
   );
 };

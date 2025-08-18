@@ -42,6 +42,10 @@ const Contact = () => {
       
       setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent.' });
       setFormData({ name: '', email: '', subject: '', message: '' });
+      // Auto-clear success after short delay so the form can be used again
+      setTimeout(() => {
+        setSubmitStatus(null);
+      }, 2000);
     } catch (error) {
       setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
     } finally {
@@ -386,14 +390,41 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className={`w-full font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center space-x-3 ${
-                  isSubmitting 
-                    ? 'bg-gray-600 cursor-not-allowed opacity-50' 
-                    : 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/25'
-                } text-white`}
+                className={`w-full font-semibold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 text-white ${
+                  isSubmitting
+                    ? 'bg-gray-600 cursor-wait opacity-80'
+                    : submitStatus?.type === 'success'
+                      ? 'bg-green-600 hover:bg-green-700'
+                      : submitStatus?.type === 'error'
+                        ? 'bg-red-600 hover:bg-red-700'
+                        : 'bg-blue-600 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/25'
+                }`}
               >
-                <Send size={20} />
-                <span>{isSubmitting ? 'Sending Message...' : 'Send Message'}</span>
+                {isSubmitting ? (
+                  <>
+                    <motion.span
+                      aria-hidden
+                      className="h-5 w-5 border-2 border-white/70 border-t-transparent rounded-full animate-spin"
+                    />
+                    <span>Sending…</span>
+                  </>
+                ) : submitStatus?.type === 'success' ? (
+                  <>
+                    <CheckCircle size={20} />
+                    <motion.span
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      Sent!
+                    </motion.span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    <span>Send Message</span>
+                  </>
+                )}
               </motion.button>
 
               <p className="text-center text-sm text-gray-400">

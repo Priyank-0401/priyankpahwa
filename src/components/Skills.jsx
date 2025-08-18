@@ -1,25 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Code,
-  Globe,
-  Database,
-  Cpu,
-  Settings,
-  Zap,
-  Layers,
-  Brain,
-  Shield,
-  Monitor,
-  Server,
-  Smartphone,
-  Cloud,
-  GitBranch,
-  Terminal
-} from 'lucide-react';
+import SkillsBanner from './SkillsBanner';
 
 // Technology Icon Component with real tech icons
-const TechIcon = ({ name, category }) => {
+const TechIcon = ({ name, category, showLabel = false, showTooltip = true }) => {
   const getTechConfig = (techName) => {
     const configs = {
       // Frontend Technologies
@@ -73,6 +57,18 @@ const TechIcon = ({ name, category }) => {
         ), 
         shadow: 'shadow-blue-600/20' 
       },
+      // SQL (generic database cylinder)
+      'SQL': {
+        bg: 'bg-indigo-600',
+        text: 'text-white',
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
+            <ellipse cx="12" cy="5" rx="8" ry="3" />
+            <path d="M4 5v10c0 1.657 3.582 3 8 3s8-1.343 8-3V5"/>
+          </svg>
+        ),
+        shadow: 'shadow-indigo-600/20'
+      },
       'TypeScript': { 
         bg: 'bg-blue-700', 
         text: 'text-white', 
@@ -93,6 +89,27 @@ const TechIcon = ({ name, category }) => {
         ), 
         shadow: 'shadow-gray-800/20' 
       },
+      // Aliases and additional techs to support simplified categories
+      'React.js': { bg: 'bg-cyan-400', text: 'text-black', icon: (
+        <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278z"/></svg>
+      ), shadow: 'shadow-cyan-400/20' },
+      'TailwindCSS': { bg: 'bg-cyan-500', text: 'text-white', icon: (
+        <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor"><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/></svg>
+      ), shadow: 'shadow-cyan-500/20' },
+      'Java': { bg: 'bg-orange-500', text: 'text-white', icon: <span className="text-sm font-semibold">Java</span>, shadow: 'shadow-orange-500/20' },
+      'C++': { bg: 'bg-blue-700', text: 'text-white', icon: <span className="text-sm font-semibold">C++</span>, shadow: 'shadow-blue-700/20' },
+      'PHP': { bg: 'bg-indigo-700', text: 'text-white', icon: <span className="text-sm font-semibold">PHP</span>, shadow: 'shadow-indigo-700/20' },
+      'Three.js': { bg: 'bg-gray-700', text: 'text-white', icon: <span className="text-sm font-semibold">Three</span>, shadow: 'shadow-gray-700/20' },
+      'MySQL': { bg: 'bg-blue-600', text: 'text-white', icon: <span className="text-sm font-semibold">MySQL</span>, shadow: 'shadow-blue-600/20' },
+      'AWS': { bg: 'bg-orange-600', text: 'text-white', icon: <span className="text-sm font-semibold">AWS</span>, shadow: 'shadow-orange-600/20' },
+      'Azure': { bg: 'bg-blue-500', text: 'text-white', icon: <span className="text-sm font-semibold">Azure</span>, shadow: 'shadow-blue-500/20' },
+      'GCP': { bg: 'bg-blue-400', text: 'text-white', icon: <span className="text-sm font-semibold">GCP</span>, shadow: 'shadow-blue-400/20' },
+      'Web3': { bg: 'bg-orange-700', text: 'text-white', icon: <span className="text-sm font-semibold">Web3</span>, shadow: 'shadow-orange-700/20' },
+      'DApps': { bg: 'bg-emerald-600', text: 'text-white', icon: <span className="text-sm font-semibold">DApps</span>, shadow: 'shadow-emerald-600/20' },
+      'LLM Integration': { bg: 'bg-purple-600', text: 'text-white', icon: <span className="text-[10px] font-semibold">LLM</span>, shadow: 'shadow-purple-600/20' },
+      'Computer Vision (MediaPipe)': { bg: 'bg-pink-600', text: 'text-white', icon: <span className="text-[10px] font-semibold">CV</span>, shadow: 'shadow-pink-600/20' },
+      'NLP': { bg: 'bg-teal-600', text: 'text-white', icon: <span className="text-sm font-semibold">NLP</span>, shadow: 'shadow-teal-600/20' },
+      'TTS': { bg: 'bg-yellow-600', text: 'text-white', icon: <span className="text-sm font-semibold">TTS</span>, shadow: 'shadow-yellow-600/20' },
       
       // Backend Technologies  
       'Node.js': { 
@@ -351,6 +368,27 @@ const TechIcon = ({ name, category }) => {
         ), 
         shadow: 'shadow-teal-500/20' 
       },
+      // Generic ML & DL glyphs
+      'Machine Learning': {
+        bg: 'bg-fuchsia-600',
+        text: 'text-white',
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
+            <path d="M4 7a3 3 0 013-3h10a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7zm5 2h2v6H9V9zm4 0h2v6h-2V9z"/>
+          </svg>
+        ),
+        shadow: 'shadow-fuchsia-600/20'
+      },
+      'Deep Learning': {
+        bg: 'bg-purple-700',
+        text: 'text-white',
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
+            <path d="M12 2l3 5-3 5-3-5 3-5zm-7 7l3 5-3 5-3-5 3-5zm14 0l3 5-3 5-3-5 3-5z"/>
+          </svg>
+        ),
+        shadow: 'shadow-purple-700/20'
+      },
       'Emotion Detection': { 
         bg: 'bg-yellow-600', 
         text: 'text-white', 
@@ -369,138 +407,164 @@ const TechIcon = ({ name, category }) => {
     return configs[techName] || configs['default'];
   };
 
-  const config = getTechConfig(name);    return (
-    <div className="flex flex-col items-center group">
-      <div className={`w-14 h-14 rounded-xl ${config.bg} ${config.text} flex items-center justify-center font-bold text-xs ${config.shadow} shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer mb-2`}>
+  const config = getTechConfig(name);
+  return (
+    <div className="relative flex flex-col items-center group" aria-label={name}>
+      <div className={`w-16 h-16 rounded-xl ${config.bg} ${config.text} flex items-center justify-center font-bold text-xs ${config.shadow} shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer`} title={name}>
         {typeof config.icon === 'string' ? config.icon : config.icon}
       </div>
-      <span className="text-gray-300 text-xs font-medium text-center group-hover:text-white transition-colors duration-300">
-        {name}
-      </span>
+      {showLabel && (
+        <div className="mt-2 text-xs md:text-sm text-slate-200/90 whitespace-nowrap">
+          {name}
+        </div>
+      )}
+      {showTooltip && (
+        <div className="pointer-events-none absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow border border-gray-700 whitespace-nowrap">
+          {name}
+        </div>
+      )}
     </div>
   );
 };
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState('all');  // Skill categories organized with comprehensive technology stack
+  // Items for rotating orbit banner
+  const orbitSkills = [
+    'React',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'SQL',
+    'Python',
+    'JavaScript',
+    'TypeScript',
+    'Git',
+    'GitHub',
+    'Docker',
+    'Solidity',
+    'Ethereum',
+    'HTML5',
+    'CSS3',
+    'Tailwind CSS'
+  ];
+
+  // Skills without dedicated SVG icons in TechIcon: render as text pills in a second banner
+  const textOnlySkills = [
+    'Machine Learning',
+    'Deep Learning',
+    'Java',
+    'C++',
+    'PHP',
+    'Three.js',
+    'MySQL',
+    'AWS',
+    'Azure',
+    'GCP',
+    'Web3',
+    'DApps',
+    'LLM Integration',
+    'Computer Vision (MediaPipe)',
+    'NLP',
+    'TTS'
+  ];
+
+  // Simplified categories per user request
   const skillCategories = [
     {
-      id: 'frontend',
-      title: 'FRONTEND',
-      skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Tailwind CSS']
+      id: 'languages',
+      title: 'LANGUAGES',
+      skills: ['Python', 'Java', 'C++', 'JavaScript', 'PHP']
     },
     {
-      id: 'backend',
-      title: 'BACKEND & SERVER',
-      skills: ['Node.js', 'REST APIs', 'Firebase']
+      id: 'aiml',
+      title: 'AI / ML',
+      skills: ['LLM Integration', 'Computer Vision (MediaPipe)', 'NLP', 'TTS']
+    },
+    {
+      id: 'webdev',
+      title: 'WEB DEVELOPMENT',
+      skills: ['React.js', 'Node.js', 'Express.js', 'Three.js', 'TailwindCSS']
+    },
+    {
+      id: 'databases',
+      title: 'DATABASES',
+      skills: ['Firebase', 'MySQL']
     },
     {
       id: 'blockchain',
-      title: 'BLOCKCHAIN & WEB3',
-      skills: ['Solidity', 'Web3.js', 'Ethereum', 'Smart Contracts']
+      title: 'BLOCKCHAIN',
+      skills: ['Solidity', 'Smart Contracts', 'Web3', 'DApps']
     },
     {
-      id: 'fullstack',
-      title: 'FULL STACK & DEV TOOLS',
-      skills: ['Git', 'GitHub', 'VS Code', 'Netlify', 'GitHub Pages']
-    },    {
-      id: 'embedded',
-      title: 'EMBEDDED SYSTEMS/IOT',
-      skills: ['Arduino', 'Raspberry Pi', 'Embedded C']
-    },
-    {
-      id: 'ai',
-      title: 'AI/MISCELLANEOUS',
-      skills: ['AI Agents', 'OpenAI APIs', 'Emotion Detection', 'Python']
+      id: 'tools',
+      title: 'TOOLS',
+      skills: ['Git', 'Docker', 'AWS', 'Azure', 'GCP']
     }
-  ];  // Statistics reflecting comprehensive technology stack
-  const stats = [
-    { label: "Technologies", value: "22+", icon: Code },
-    { label: "Categories", value: "6", icon: Layers },
-    { label: "Years Learning", value: "3+", icon: Zap },
-    { label: "Projects Built", value: "4", icon: Shield }
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gray-900">
+    <section id="skills" className="relative py-20 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950 overflow-hidden">
+      {/* subtle background accents */}
+      <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden>
+        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle at center, rgba(56,189,248,0.12), transparent 60%)' }} />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle at center, rgba(99,102,241,0.12), transparent 60%)' }} />
+      </div>
+
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-10"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Technical <span className="text-blue-400">Skills</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+            My <span className="text-cyan-400">Skills</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Technologies and tools I use to build modern applications
+          <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+            Technologies I work with across frontend, backend, cloud, and AI
           </p>
-        </motion.div>        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: categoryIndex * 0.1 }}
-              className="text-center bg-gray-800 border border-gray-700 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300"
-            >
-              <h3 className="text-lg font-bold text-blue-400 mb-8 tracking-wider">
-                {category.title}
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: skillIndex * 0.1 }}
-                  >
-                    <TechIcon name={skill} category={category.id} />
-                  </motion.div>
-                ))}
+        </motion.div>
+
+        {/* Icon marquee (left scroll) */}
+        <div className="mb-10" style={{ perspective: 1000 }}>
+          <SkillsBanner
+            items={orbitSkills}
+            size={380}
+            radius={140}
+            duration={26}
+            variant="lineTilt"
+            renderItem={(name) => (
+              <div className="p-5 md:p-6 scale-125 md:scale-150">
+                <TechIcon name={name} showLabel={true} showTooltip={false} />
               </div>
-            </motion.div>
-          ))}
+            )}
+          />
         </div>
 
-        {/* Skills Statistics */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-gray-800 border border-gray-700 rounded-xl p-6 text-center hover:border-blue-500/50 transition-all duration-300"
-            >
-              <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-2xl md:text-3xl font-bold text-white mb-2"
-              >
-                {stat.value}
-              </motion.div>
-              <p className="text-gray-400 text-sm font-medium">{stat.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Text-only marquee (right scroll) */}
+        {textOnlySkills.length > 0 && (
+          <div className="mb-2" style={{ perspective: 1000 }}>
+            <SkillsBanner
+              items={textOnlySkills}
+              duration={24}
+              variant="lineTilt"
+              direction="right"
+              renderItem={(label) => (
+                <div className="shrink-0">
+                  <div className="px-5 py-2.5 rounded-xl bg-slate-800/70 text-slate-200 border border-slate-700 shadow shadow-slate-900/20 hover:shadow-slate-900/30 hover:scale-105 transition-all text-sm md:text-base whitespace-nowrap">
+                    {label}
+                  </div>
+                </div>
+              )}
+            />
+          </div>
+        )}
+
+        {/* Caption removed per request */}
+
+
       </div>
     </section>
   );

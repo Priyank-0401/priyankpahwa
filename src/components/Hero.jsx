@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+
 import { 
   Github, 
   Linkedin, 
@@ -15,13 +16,35 @@ import {
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   
+  // Framer Motion variants for letter stagger
+  const containerVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.035, delayChildren: 0.1 }
+    }
+  };
+  const letterVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } }
+  };
+  
   const roles = [
-    "Blockchain Developer",
-    "Web3 Engineer", 
-    "Software Engineer",
+    "Software Developer",
     "AI Enthusiast",
+    "Web3 Engineer", 
+    "Blockchain Developer",
     "Problem Solver"
   ];
+
+  // Rotate roles periodically
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrentRole((prev) => (prev + 1) % roles.length);
+    }, 2500);
+    return () => clearInterval(id);
+  }, [roles.length]);
 
   const highlights = [
     { icon: Code, text: "2+ Major Projects", color: "text-blue-400" },
@@ -30,12 +53,6 @@ const Hero = () => {
     { icon: Sparkles, text: "Innovation Focused", color: "text-purple-400" }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
   const socialLinks = [
     { 
       icon: Github, 
@@ -89,6 +106,23 @@ const Hero = () => {
           }}
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-xl"
         />
+        {/* Subtle grid overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(60%_60%_at_50%_50%,black,transparent)] opacity-40"
+          style={{
+            backgroundImage:
+              'linear-gradient(to_right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to_bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+            backgroundPosition: '0 0, 0 0'
+          }}
+        />
+        {/* Soft rotating conic gradient for depth */}
+        <motion.div
+          aria-hidden
+          className="absolute -inset-1/2 md:-inset-1/3 bg-[conic-gradient(from_90deg_at_50%_50%,rgba(59,130,246,0.06),rgba(147,51,234,0.06),rgba(59,130,246,0.06))] blur-3xl"
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+        />
       </div>
 
       <div className="relative z-10 container mx-auto px-6 text-center">
@@ -96,17 +130,21 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-        >          {/* Main heading */}
+        >          {/* Main heading with letter stagger */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
             className="text-5xl md:text-7xl font-bold mb-6 text-white"
           >
-            Hi, I'm Priyank
+            {"Hi, I'm Priyank Pahwa".split("").map((char, idx) => (
+              <motion.span key={`h-${idx}`} variants={letterVariants} className={char === ' ' ? 'inline-block w-2' : ''}>
+                {char}
+              </motion.span>
+            ))}
           </motion.h1>
 
-          {/* Dynamic role display */}
+          {/* Dynamic role display with letter stagger */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -115,13 +153,20 @@ const Hero = () => {
           >
             <span className="text-gray-300">I'm {/^[aeiouAEIOU]/.test(roles[currentRole]) ? 'an' : 'a'} </span>
             <motion.span
-              key={currentRole}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-blue-400 font-bold"
+              key={`role-${currentRole}`}
+              variants={{
+                hidden: { opacity: 0, y: 12 },
+                visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.02 } }
+              }}
+              initial="hidden"
+              animate="visible"
+              className="text-blue-400 font-bold inline-block"
             >
-              {roles[currentRole]}
+              {roles[currentRole].split("").map((c, i) => (
+                <motion.span key={`rl-${currentRole}-${i}`} variants={letterVariants} className={c === ' ' ? 'inline-block w-2' : ''}>
+                  {c}
+                </motion.span>
+              ))}
             </motion.span>
           </motion.div>
 
@@ -152,8 +197,8 @@ const Hero = () => {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            3rd-year Computer Science student at Manipal University Jaipur with hands-on experience in 
-            blockchain development, Web3 technologies, IoT systems, and AI/ML. Building innovative solutions 
+            Final year Computer Science student at Manipal University Jaipur with hands-on experience in 
+            Full Stack development, Web3 technologies, IoT systems, and AI/ML. Building innovative solutions 
             that bridge cutting-edge technology and real-world applications.
           </motion.p>
 
