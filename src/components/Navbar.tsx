@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Github, Linkedin } from 'lucide-react';
 
 export default function Navbar() {
@@ -16,7 +17,8 @@ export default function Navbar() {
     return (
         <nav className="absolute top-0 w-full flex items-center justify-between px-6 md:px-12 py-8 z-50 text-foreground pointer-events-none">
             {/* Left */}
-            <div className="flex items-center gap-2 font-bold tracking-widest text-sm md:text-base uppercase pointer-events-auto">
+            <div className="flex items-center gap-3 font-bold tracking-widest text-sm md:text-base uppercase pointer-events-auto">
+                <Image src="/logo.png" alt="Priyank Logo" width={40} height={40} className="w-8 h-8 md:w-10 md:h-10 object-contain rounded-sm" priority />
                 <span>Priyank Pahwa</span>
             </div>
 
