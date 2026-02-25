@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  // Ignore basePath if you use a custom domain!
-  basePath: "/priyankpahwa",
+  // Only use the basePath when building for production (GitHub Pages)
+  basePath: process.env.NODE_ENV === "production" ? "/priyankpahwa" : "",
   images: {
     unoptimized: true,
   },
