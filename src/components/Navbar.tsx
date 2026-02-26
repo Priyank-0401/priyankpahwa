@@ -25,11 +25,26 @@ export default function Navbar() {
 
             {/* Center */}
             <div className="hidden md:flex items-center gap-8 lg:gap-12 font-bold tracking-wide text-xs uppercase pointer-events-auto mix-blend-difference lg:mix-blend-normal">
-                <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="hover:opacity-75 transition-opacity cursor-pointer">About</a>
-                <a href="#experience" onClick={(e) => handleScroll(e, 'experience')} className="hover:opacity-75 transition-opacity cursor-pointer">Experience</a>
-                <a href="#capabilities" onClick={(e) => handleScroll(e, 'capabilities')} className="hover:opacity-75 transition-opacity cursor-pointer">Capabilities</a>
-                <a href="#projects" onClick={(e) => handleScroll(e, 'projects')} className="hover:opacity-75 transition-opacity cursor-pointer">Projects</a>
-                <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="hover:opacity-75 transition-opacity cursor-pointer">Contact</a>
+                <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
+                    <span className="relative z-10">About</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
+                </a>
+                <a href="#experience" onClick={(e) => handleScroll(e, 'experience')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
+                    <span className="relative z-10">Experience</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
+                </a>
+                <a href="#capabilities" onClick={(e) => handleScroll(e, 'capabilities')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
+                    <span className="relative z-10">Capabilities</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
+                </a>
+                <a href="#projects" onClick={(e) => handleScroll(e, 'projects')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
+                    <span className="relative z-10">Projects</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
+                </a>
+                <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
+                    <span className="relative z-10">Contact</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
+                </a>
             </div>
 
             {/* Right */}
@@ -38,7 +53,7 @@ export default function Navbar() {
                     href="https://github.com/Priyank-0401"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 border-2 border-foreground rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-colors"
+                    className="w-10 h-10 border-2 border-foreground rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300"
                 >
                     <Github size={18} />
                 </a>
@@ -46,7 +61,7 @@ export default function Navbar() {
                     href="https://www.linkedin.com/in/priyankpahwa41"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 border-2 border-foreground rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-colors"
+                    className="w-10 h-10 border-2 border-foreground rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300"
                 >
                     <Linkedin size={18} />
                 </a>
