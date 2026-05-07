@@ -1,74 +1,105 @@
-import React from 'react';
-import { FadeUp, FadeUpStagger, FadeUpItem, ParallaxText } from './Reveal';
+"use client";
+
+import { motion } from "framer-motion";
+import { Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import FadeIn from "./FadeIn";
+import { usePortfolioMode } from "./PortfolioMode";
 
 export default function Contact() {
-    return (
-        <section id="contact" className="w-full relative flex flex-col items-center justify-center py-40 px-6 md:px-12 lg:px-24 border-t border-foreground/10 bg-foreground/5 overflow-hidden">
-            {/* Background Faint Text */}
-            <div className="absolute top-1/2 left-1/2 w-full flex justify-center pointer-events-none z-0 select-none opacity-[0.02] transform -translate-x-1/2 -translate-y-1/2">
-                <ParallaxText offset={150}>
-                    <span
-                        className="text-[20vw] leading-none text-foreground whitespace-nowrap inline-block"
-                        style={{ fontFamily: 'var(--font-anton)' }}
-                    >
-                        LET'S BUILD
-                    </span>
-                </ParallaxText>
-            </div>
+  const { isEngineer } = usePortfolioMode();
 
-            <div className="relative z-10 flex flex-col items-center text-center max-w-5xl mx-auto">
-                <FadeUp>
-                    <h2
-                        className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground uppercase tracking-widest leading-none mb-8"
-                        style={{ fontFamily: 'var(--font-anton)' }}
-                    >
-                        Ready to build something that actually works?
-                    </h2>
-                </FadeUp>
+  return (
+    <section id="contact" className="py-32 px-6 md:px-12">
+      <div className="max-w-5xl mx-auto text-center">
+        <FadeIn>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-accent font-fira text-sm font-medium tracking-wider">
+              {isEngineer ? "BUILD" : "SHIP"}
+            </span>
+            <div className="h-px w-12 bg-surface-light/30" />
+            <span className="text-muted text-sm font-medium tracking-wider uppercase">
+              Get in Touch
+            </span>
+          </div>
+        </FadeIn>
 
-                <FadeUpStagger className="flex flex-col flex-1 items-center w-full max-w-2xl mx-auto">
-                    <FadeUpItem>
-                        <p className="text-xl md:text-2xl text-foreground/70 font-medium max-w-2xl mb-16 leading-relaxed">
-                            I'm open to discussing product, project, and execution-focused roles - or just interesting systems.
-                        </p>
-                    </FadeUpItem>
+        <FadeIn delay={0.1}>
+          <h2 className="font-outfit text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] mb-8">
+            {isEngineer ? "Let's Build" : "Let's Ship"}
+          </h2>
+        </FadeIn>
 
-                    <FadeUpItem>
-                        <div className="w-full max-w-sm h-px bg-foreground/10 mb-12 mx-auto"></div>
-                    </FadeUpItem>
+        <FadeIn delay={0.2}>
+          <p className="text-xl md:text-2xl text-muted leading-relaxed mb-12 max-w-2xl mx-auto">
+            {isEngineer ? (
+              <>
+                If you&apos;re looking for an engineer who understands systems
+                <span className="text-foreground"> and </span>
+                can own features end-to-end — from architecture to deployment — I&apos;m ready.
+              </>
+            ) : (
+              <>
+                If you&apos;re looking for someone who bridges engineering depth
+                <span className="text-foreground"> and </span>
+                delivery execution — who ships outcomes, not just tasks — I&apos;m ready.
+              </>
+            )}
+          </p>
+        </FadeIn>
 
-                    <FadeUpItem>
-                        <a
-                            href="mailto:priyankpahwa41@gmail.com"
-                            className="group relative inline-flex items-center gap-4 text-2xl md:text-4xl font-black text-foreground uppercase tracking-wider hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 mb-24"
-                            style={{ fontFamily: 'var(--font-anton)' }}
-                        >
-                            <span className="relative">
-                                Let's Talk
-                                <span className="absolute -bottom-2 left-0 w-0 h-1 bg-foreground transition-all duration-300 group-hover:w-full"></span>
-                            </span>
-                            <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
-                        </a>
-                    </FadeUpItem>
+        <FadeIn delay={0.3}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <motion.a
+              href="mailto:priyankpahwa41@gmail.com"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-3 px-8 py-4 rounded-full bg-accent text-background font-semibold text-lg hover:bg-accent/90 transition-colors"
+            >
+              <Mail size={20} />
+              priyankpahwa41@gmail.com
+            </motion.a>
 
-                    <FadeUpItem>
-                        <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-sm md:text-base font-bold tracking-widest uppercase text-foreground/80">
-                            <a href="mailto:priyankpahwa41@gmail.com" className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                                <span className="relative z-10">Email</span>
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                            </a>
-                            <a href="https://www.linkedin.com/in/priyankpahwa41" target="_blank" rel="noopener noreferrer" className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                                <span className="relative z-10">LinkedIn</span>
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                            </a>
-                            <a href="https://github.com/Priyank-0401" target="_blank" rel="noopener noreferrer" className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                                <span className="relative z-10">GitHub</span>
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                            </a>
-                        </div>
-                    </FadeUpItem>
-                </FadeUpStagger>
-            </div>
-        </section>
-    );
+            <motion.a
+              href="/Priyank_Pahwa_Project_Management_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-3 px-8 py-4 rounded-full bg-surface border border-surface-light/40 text-foreground font-semibold text-lg hover:bg-surface-light transition-colors"
+            >
+              <ArrowUpRight size={20} />
+              View Resume
+            </motion.a>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.4}>
+          <div className="flex items-center justify-center gap-6">
+            <a
+              href="https://github.com/Priyank-0401"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full bg-surface border border-surface-light/30 text-muted hover:text-accent hover:border-accent/30 transition-all"
+            >
+              <Github size={20} />
+            </a>
+            <a
+              href="https://linkedin.com/in/priyankpahwa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full bg-surface border border-surface-light/30 text-muted hover:text-accent hover:border-accent/30 transition-all"
+            >
+              <Linkedin size={20} />
+            </a>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.5}>
+          <p className="text-muted text-sm mt-20">
+            Built with Next.js, Tailwind CSS & Framer Motion
+          </p>
+        </FadeIn>
+      </div>
+    </section>
+  );
 }

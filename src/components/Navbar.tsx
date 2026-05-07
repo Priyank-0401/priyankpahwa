@@ -1,71 +1,153 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Github, Linkedin } from 'lucide-react';
-import logoImg from '../../public/logo.png';
+import { useState, useEffect } from "react";
+import { Menu, X, Download, Code2, ClipboardList } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePortfolioMode } from "./PortfolioMode";
+
+const navLinks = [
+  { href: "#hero", label: "Home" },
+  { href: "#case-study", label: "Case Study" },
+  { href: "#projects", label: "Projects" },
+  { href: "#how-i-work", label: "How I Work" },
+  { href: "#skills", label: "Skills" },
+  { href: "#contact", label: "Contact" },
+];
 
 export default function Navbar() {
-    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
-        e.preventDefault();
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { mode, setMode, isEngineer } = usePortfolioMode();
 
-    return (
-        <nav className="absolute top-0 w-full flex items-center justify-between px-6 md:px-12 py-8 z-50 text-foreground pointer-events-none">
-            {/* Left */}
-            <div className="flex items-center gap-3 font-bold tracking-widest text-sm md:text-base uppercase pointer-events-auto">
-                <Image src={logoImg} alt="Priyank Logo" width={40} height={40} className="w-8 h-8 md:w-10 md:h-10 object-contain rounded-sm" priority />
-                <span>Priyank Pahwa</span>
-            </div>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-            {/* Center */}
-            <div className="hidden md:flex items-center gap-8 lg:gap-12 font-bold tracking-wide text-xs uppercase pointer-events-auto mix-blend-difference lg:mix-blend-normal">
-                <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                    <span className="relative z-10">About</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
-                <a href="#experience" onClick={(e) => handleScroll(e, 'experience')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                    <span className="relative z-10">Experience</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
-                <a href="#capabilities" onClick={(e) => handleScroll(e, 'capabilities')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                    <span className="relative z-10">Capabilities</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
-                <a href="#projects" onClick={(e) => handleScroll(e, 'projects')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                    <span className="relative z-10">Projects</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
-                <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="relative group hover:text-foreground transition-colors overflow-hidden py-1">
-                    <span className="relative z-10">Contact</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 ease-out group-hover:w-full"></span>
-                </a>
-            </div>
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/90 backdrop-blur-md border-b border-surface-light/50"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
+        <a
+          href="#hero"
+          className="font-outfit text-xl font-bold tracking-tight text-foreground hover:text-accent transition-colors"
+        >
+          PP
+        </a>
 
-            {/* Right */}
-            <div className="flex items-center gap-4 pointer-events-auto">
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-muted hover:text-foreground transition-colors tracking-wide"
+            >
+              {link.label}
+            </a>
+          ))}
+
+          <div className="flex items-center bg-surface rounded-full p-1 border border-surface-light/40">
+            <button
+              onClick={() => setMode("engineer")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                isEngineer
+                  ? "bg-accent text-background shadow-md"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              <Code2 size={13} />
+              Engineer View
+            </button>
+            <button
+              onClick={() => setMode("execution")}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                !isEngineer
+                  ? "bg-emerald text-background shadow-md"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              <ClipboardList size={13} />
+              Execution View
+            </button>
+          </div>
+
+          <a
+            href="/Priyank_Pahwa_Project_Management_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold hover:bg-accent/20 transition-all border border-accent/20"
+          >
+            <Download size={14} />
+            Resume
+          </a>
+        </div>
+
+        <div className="flex items-center gap-3 md:hidden">
+          <div className="flex items-center bg-surface rounded-full p-0.5 border border-surface-light/40">
+            <button
+              onClick={() => setMode("engineer")}
+              className={`p-2 rounded-full transition-all ${
+                isEngineer ? "bg-accent text-background" : "text-muted"
+              }`}
+            >
+              <Code2 size={14} />
+            </button>
+            <button
+              onClick={() => setMode("execution")}
+              className={`p-2 rounded-full transition-all ${
+                !isEngineer ? "bg-emerald text-background" : "text-muted"
+              }`}
+            >
+              <ClipboardList size={14} />
+            </button>
+          </div>
+          <button
+            className="text-foreground"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-background/95 backdrop-blur-md border-b border-surface-light/50 overflow-hidden"
+          >
+            <div className="px-6 py-6 flex flex-col gap-4">
+              {navLinks.map((link) => (
                 <a
-                    href="https://github.com/Priyank-0401"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 border-2 border-foreground rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300"
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-medium text-muted hover:text-foreground transition-colors"
                 >
-                    <Github size={18} />
+                  {link.label}
                 </a>
-                <a
-                    href="https://www.linkedin.com/in/priyankpahwa41"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 border-2 border-foreground rounded-full flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300"
-                >
-                    <Linkedin size={18} />
-                </a>
+              ))}
+              <a
+                href="/Priyank_Pahwa_Project_Management_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3 rounded-lg bg-accent/10 text-accent font-semibold hover:bg-accent/20 transition-all border border-accent/20 mt-2"
+              >
+                <Download size={16} />
+                Download Resume
+              </a>
             </div>
-        </nav>
-    );
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
 }

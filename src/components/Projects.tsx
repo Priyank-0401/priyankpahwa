@@ -1,206 +1,224 @@
-import React from 'react';
-import Link from 'next/link';
-import { FadeUp, FadeUpStagger, FadeUpItem, ParallaxText, FocusProject } from './Reveal';
+"use client";
+
+import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
+import FadeIn from "./FadeIn";
+import { usePortfolioMode } from "./PortfolioMode";
+
+const engineerProjects = [
+  {
+    number: "01",
+    name: "Seriva",
+    tagline: "AI Wellness & Emotion-Aware Interaction Platform",
+    role: "Full-Stack Owner",
+    description:
+      "Built an immersive AI wellness platform integrating conversational AI, emotion-aware interactions, real-time communication workflows, and a human-centered interface experience.",
+    highlights: [
+      "Three.js 3D avatar interaction with real-time animation",
+      "Conversational AI with emotion-aware contextual responses",
+      "Full-stack architecture with Google Cloud Secret Manager",
+      "Secure API orchestration and IAM-based access control",
+    ],
+    tech: ["React", "Three.js", "AI/LLM", "Google Cloud", "Node.js"],
+    link: "https://github.com/Priyank-0401/Seriva-Showcase",
+    humor: "Teaching AI emotional intelligence while debugging my own.",
+  },
+  {
+    number: "02",
+    name: "PharmaFleet",
+    tagline: "Pharmaceutical Logistics & Inventory Platform",
+    role: "Designer & Engineer",
+    description:
+      "Designed a workflow-driven platform for managing pharmaceutical inventory, logistics coordination, delivery tracking, and operational visibility.",
+    highlights: [
+      "Admin workflows and operational dashboards",
+      "Inventory state management for high-frequency updates",
+      "Audit-ready workflows for compliance and reporting",
+      "70%+ transcription error reduction through workflow mapping",
+    ],
+    tech: ["React", "Node.js", "SQL", "Dashboard Design"],
+    link: "https://github.com/Priyank-0401/Inventory-Management",
+    humor: "Turns out inventory problems become very real when medicines disappear.",
+  },
+  {
+    number: "03",
+    name: "WePay",
+    tagline: "Digital Wallet & Transaction Management Platform",
+    role: "Solo Engineer",
+    description:
+      "Built a fintech-oriented wallet system handling transaction workflows, account management, payment processing logic, and financial operation flows.",
+    highlights: [
+      "Transaction consistency and API workflows",
+      "Wallet interaction and full transaction lifecycle handling",
+      "Tested reliability across simulated blockchain environments",
+      "Solidity + Web3.js integration patterns",
+    ],
+    tech: ["Solidity", "Web3.js", "React", "Ethereum"],
+    link: "https://github.com/Priyank-0401/wepay-crypto",
+    humor: "Financial systems are surprisingly calm until decimals get involved.",
+  },
+];
+
+const executionProjects = [
+  {
+    number: "01",
+    name: "Seriva",
+    tagline: "AI Product — Wellness & Interaction",
+    role: "Product Owner & Delivery Lead",
+    description:
+      "Led end-to-end delivery of an AI wellness product from concept to deployment. Managed the integration of conversational AI, real-time 3D interactions, and cloud infrastructure into a cohesive user experience.",
+    highlights: [
+      "Scoped AI interaction flows and emotional response triggers",
+      "Coordinated frontend 3D experience with backend AI orchestration",
+      "Managed Google Cloud deployment, IAM roles, and secret management",
+      "Delivered a production-ready product with measurable user engagement",
+    ],
+    tech: ["React", "Three.js", "AI/LLM", "Google Cloud", "Node.js"],
+    link: "https://github.com/Priyank-0401/Seriva-Showcase",
+    humor: "Teaching AI emotional intelligence while debugging my own.",
+  },
+  {
+    number: "02",
+    name: "PharmaFleet",
+    tagline: "Operations Platform — Inventory & Compliance",
+    role: "Designer & Delivery Lead",
+    description:
+      "Modernized legacy pharmaceutical inventory tracking through workflow mapping and system design. Delivered a centralized platform replacing manual processes with digital accuracy.",
+    highlights: [
+      "Mapped legacy manual workflows before writing any code",
+      "Defined compliance requirements and audit trail standards",
+      "Delivered admin dashboards with real-time inventory visibility",
+      "Achieved 70%+ error reduction through structured digitization",
+    ],
+    tech: ["React", "Node.js", "SQL", "Dashboard Design"],
+    link: "https://github.com/Priyank-0401/Inventory-Management",
+    humor: "Turns out inventory problems become very real when medicines disappear.",
+  },
+  {
+    number: "03",
+    name: "WePay",
+    tagline: "Fintech Product — Wallet & Transactions",
+    role: "Solo Product Owner & Engineer",
+    description:
+      "Owned the full lifecycle of a digital wallet product from requirements definition to deployment on Ethereum testnets. Focused on transaction reliability and user trust.",
+    highlights: [
+      "Defined transaction lifecycle requirements and edge cases",
+      "Validated smart contract reliability across test environments",
+      "Designed wallet UX flows for payment initiation and confirmation",
+      "Shipped a functional prototype demonstrating real transaction patterns",
+    ],
+    tech: ["Solidity", "Web3.js", "React", "Ethereum"],
+    link: "https://github.com/Priyank-0401/wepay-crypto",
+    humor: "Financial systems are surprisingly calm until decimals get involved.",
+  },
+];
 
 export default function Projects() {
-    return (
-        <section id="projects" className="w-full relative flex flex-col py-32 px-6 md:px-12 lg:px-24">
-            {/* Background Faint Text */}
-            <div className="absolute top-32 right-0 w-full overflow-hidden flex justify-end pointer-events-none z-0 select-none opacity-[0.015]">
-                <ParallaxText offset={150}>
-                    <span
-                        className="text-[22vw] leading-none text-foreground whitespace-nowrap inline-block"
-                        style={{ fontFamily: 'var(--font-anton)' }}
+  const { isEngineer } = usePortfolioMode();
+  const projects = isEngineer ? engineerProjects : executionProjects;
+
+  return (
+    <section id="projects" className="py-32 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
+        <FadeIn>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-accent font-fira text-sm font-medium tracking-wider">
+              02
+            </span>
+            <div className="h-px flex-1 bg-surface-light/30 max-w-[60px]" />
+            <span className="text-muted text-sm font-medium tracking-wider uppercase">
+              {isEngineer ? "Independent Projects" : "Product Delivery"}
+            </span>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <h2 className="font-outfit text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] mb-6">
+            {isEngineer ? "Selected Work" : "Shipped Outcomes"}
+          </h2>
+        </FadeIn>
+
+        <FadeIn delay={0.15}>
+          <p className="text-muted text-lg max-w-2xl mb-20">
+            {isEngineer
+              ? "Standalone engineering projects that demonstrate self-driven capability and exploration of emerging technologies."
+              : "Self-driven product deliveries from concept to deployment — each scoped, built, and iterated independently."}
+          </p>
+        </FadeIn>
+
+        <div className="flex flex-col gap-24">
+          {projects.map((project, i) => (
+            <FadeIn key={project.name} delay={0.1}>
+              <motion.article
+                whileHover={{ y: -2 }}
+                className="group relative"
+              >
+                <div className="absolute -left-4 lg:-left-12 top-0 opacity-[0.04] font-outfit text-[8rem] font-bold leading-none pointer-events-none group-hover:opacity-[0.08] transition-opacity duration-500 select-none">
+                  {project.number}
+                </div>
+
+                <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                  <div className="lg:col-span-4">
+                    <h3 className="font-outfit text-4xl md:text-5xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                      {project.name}
+                    </h3>
+                    <p className="text-accent font-medium text-sm tracking-wider uppercase mb-2">
+                      {project.tagline}
+                    </p>
+                    <p className="text-muted text-sm mb-2">{project.role}</p>
+                    <p className="text-xs text-muted/50 italic font-fira mb-6">
+                      {project.humor}
+                    </p>
+
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface border border-surface-light/40 text-sm font-medium text-foreground hover:bg-accent hover:text-background hover:border-accent transition-all"
                     >
-                        PROJECTS
-                    </span>
-                </ParallaxText>
-            </div>
+                      <ExternalLink size={14} />
+                      View on GitHub
+                    </a>
+                  </div>
 
-            <div className="relative z-10 max-w-6xl mx-auto w-full">
-                <FadeUp>
-                    <h2
-                        className="text-6xl md:text-8xl text-foreground font-bold uppercase mb-32 tracking-wide opacity-80 pb-8"
-                        style={{ fontFamily: 'var(--font-anton)' }}
-                    >
-                        Selected Work
-                    </h2>
-                </FadeUp>
+                  <div className="lg:col-span-8">
+                    <p className="text-lg md:text-xl text-foreground/80 leading-relaxed mb-6">
+                      {project.description}
+                    </p>
 
-                <FadeUpStagger className="flex flex-col gap-40 md:gap-48">
+                    <ul className="flex flex-col gap-3 mb-6">
+                      {project.highlights.map((highlight) => (
+                        <li
+                          key={highlight}
+                          className="flex items-start gap-3 text-muted text-sm"
+                        >
+                          <span className="text-accent mt-1 shrink-0">◆</span>
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
 
-                    {/* Project 1 */}
-                    <FadeUpItem>
-                        <FocusProject>
-                            <article className="relative flex flex-col lg:flex-row gap-8 lg:gap-16 group">
-                                <div className="absolute -left-4 lg:-left-20 top-0 opacity-[0.05] text-[8rem] font-black leading-none pointer-events-none group-hover:opacity-10 transition-opacity duration-500" style={{ fontFamily: 'var(--font-anton)' }}>
-                                    01
-                                </div>
-                                <div className="w-full lg:w-5/12 flex flex-col z-10">
-                                    <h3
-                                        className="text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] 2xl:text-7xl font-bold text-foreground uppercase tracking-[0.05em] leading-none mb-4 opacity-90 group-hover:translate-x-2 transition-transform duration-300 w-fit whitespace-nowrap"
-                                        style={{ fontFamily: 'var(--font-anton)' }}
-                                    >
-                                        Seriva
-                                    </h3>
-                                    <p className="text-[#7B5944] font-bold tracking-widest uppercase text-sm mb-6">
-                                        AI Wellness System
-                                    </p>
-                                    <a href="https://github.com/Priyank-0401/Seriva-Showcase" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-foreground flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300 mt-auto lg:flex">
-                                        ↗
-                                    </a>
-                                </div>
-                                <div className="w-full lg:w-7/12 flex flex-col pt-8 lg:pt-0 lg:border-t-4 lg:border-foreground z-10 lg:ml-8 -rotate-1 group-hover:rotate-0 transition-transform duration-500 mt-4 lg:mt-8">
-                                    <p className="text-2xl md:text-3xl font-medium text-foreground/90 max-w-2xl leading-tight mb-8">
-                                        A real-time AI companion integrating conversational intelligence with 3D interaction.
-                                    </p>
-                                    <ul className="flex flex-col gap-4 text-foreground/70 text-lg font-medium list-none p-0 m-0">
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Designed an interaction system combining LLM responses with real-time avatar rendering.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Built emotion-aware conversational flows to improve contextual responses.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Engineered a full-stack architecture with secure cloud deployment and API orchestration.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </FocusProject>
-                    </FadeUpItem>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="px-3 py-1 rounded-md bg-surface border border-surface-light/30 text-xs font-fira text-muted"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
 
-                    <div className="w-full h-px bg-foreground/10 transition-all duration-500"></div>
-
-                    {/* Project 2 */}
-                    <FadeUpItem>
-                        <FocusProject>
-                            <article className="relative flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 group">
-                                <div className="absolute -right-4 lg:-right-20 top-0 opacity-[0.05] text-[8rem] font-black leading-none pointer-events-none group-hover:opacity-10 transition-opacity duration-500" style={{ fontFamily: 'var(--font-anton)' }}>
-                                    02
-                                </div>
-                                <div className="w-full lg:w-5/12 flex flex-col z-10 items-start lg:items-end text-left lg:text-right">
-                                    <h3
-                                        className="text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] 2xl:text-7xl font-bold text-foreground uppercase tracking-[0.05em] leading-none mb-4 opacity-90 group-hover:-translate-x-2 transition-transform duration-300 w-fit whitespace-nowrap"
-                                        style={{ fontFamily: 'var(--font-anton)' }}
-                                    >
-                                        PharmaFleet
-                                    </h3>
-                                    <p className="text-[#7B5944] font-bold tracking-widest uppercase text-sm mb-6">
-                                        Operations Intelligence Platform
-                                    </p>
-                                    <a href="https://github.com/Priyank-0401/Inventory-Management" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-foreground flex items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300 mt-auto lg:flex">
-                                        ↗
-                                    </a>
-                                </div>
-                                <div className="w-full lg:w-7/12 flex flex-col pt-8 lg:pt-0 lg:border-t-4 lg:border-foreground z-10 lg:mr-8 rotate-1 group-hover:rotate-0 transition-transform duration-500 mt-4 lg:mt-8">
-                                    <p className="text-2xl md:text-3xl font-medium text-foreground/90 max-w-2xl leading-tight mb-8">
-                                        A structured system for digitizing pharmaceutical inventory and compliance workflows.
-                                    </p>
-                                    <ul className="flex flex-col gap-4 text-foreground/70 text-lg font-medium list-none p-0 m-0">
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Transformed manual tracking into a centralized, error-resistant digital system.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Designed relational data models supporting high-frequency inventory updates.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Implemented audit-ready workflows for compliance and reporting.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </FocusProject>
-                    </FadeUpItem>
-
-                    <div className="w-full h-px bg-foreground/10 transition-all duration-500"></div>
-
-                    {/* Project 3 */}
-                    <FadeUpItem>
-                        <FocusProject>
-                            <article className="relative flex flex-col lg:flex-row gap-8 lg:gap-16 group">
-                                <div className="absolute -left-4 lg:-left-20 top-0 opacity-[0.05] text-[8rem] font-black leading-none pointer-events-none group-hover:opacity-10 transition-opacity duration-500" style={{ fontFamily: 'var(--font-anton)' }}>
-                                    03
-                                </div>
-                                <div className="w-full lg:w-5/12 flex flex-col z-10">
-                                    <h3
-                                        className="text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] 2xl:text-7xl font-bold text-foreground uppercase tracking-[0.05em] leading-none mb-4 opacity-90 group-hover:translate-x-2 transition-transform duration-300 w-fit whitespace-nowrap"
-                                        style={{ fontFamily: 'var(--font-anton)' }}
-                                    >
-                                        WePay
-                                    </h3>
-                                    <p className="text-[#7B5944] font-bold tracking-widest uppercase text-sm mb-6">
-                                        Blockchain Payment System
-                                    </p>
-                                    <a href="https://github.com/Priyank-0401/wepay-crypto" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border-2 border-foreground items-center justify-center hover:bg-foreground hover:text-background transition-all hover:scale-110 active:scale-95 duration-300 mt-auto hidden lg:flex">
-                                        ↗
-                                    </a>
-                                </div>
-                                <div className="w-full lg:w-7/12 flex flex-col pt-8 lg:pt-0 lg:border-t-4 lg:border-foreground z-10 lg:ml-8 -rotate-1 group-hover:rotate-0 transition-transform duration-500 mt-4 lg:mt-8">
-                                    <p className="text-2xl md:text-3xl font-medium text-foreground/90 max-w-2xl leading-tight mb-8">
-                                        A peer-to-peer transaction system built on Ethereum test environments.
-                                    </p>
-                                    <ul className="flex flex-col gap-4 text-foreground/70 text-lg font-medium list-none p-0 m-0">
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Developed smart contract-based transaction flows with predictable validation.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Implemented wallet interaction and transaction lifecycle handling.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Tested reliability across simulated blockchain environments (Ganache).
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </FocusProject>
-                    </FadeUpItem>
-
-                    <div className="w-full h-px bg-foreground/10 transition-all duration-500"></div>
-
-                    {/* Project 4 */}
-                    <FadeUpItem>
-                        <FocusProject>
-                            <article className="relative flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 group">
-                                <div className="absolute -right-4 lg:-right-20 top-0 opacity-[0.05] text-[8rem] font-black leading-none pointer-events-none group-hover:opacity-10 transition-opacity duration-500" style={{ fontFamily: 'var(--font-anton)' }}>
-                                    04
-                                </div>
-                                <div className="w-full lg:w-5/12 flex flex-col z-10 items-start lg:items-end text-left lg:text-right">
-                                    <h3
-                                        className="text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] 2xl:text-7xl font-bold text-foreground uppercase tracking-[0.05em] leading-none mb-4 opacity-90 group-hover:-translate-x-2 transition-transform duration-300 w-fit whitespace-nowrap"
-                                        style={{ fontFamily: 'var(--font-anton)' }}
-                                    >
-                                        VendorVantage
-                                    </h3>
-                                    <p className="text-[#7B5944] font-bold tracking-widest uppercase text-sm mb-6">
-                                        AI Negotiation Workflow
-                                    </p>
-                                    <div className="h-12 border-2 border-foreground rounded-full items-center justify-center mt-auto hidden lg:flex px-4 text-xs font-bold tracking-widest uppercase text-foreground/50 border-dashed w-fit">
-                                        WIP
-                                    </div>
-                                </div>
-                                <div className="w-full lg:w-7/12 flex flex-col pt-8 lg:pt-0 lg:border-t-4 lg:border-foreground z-10 lg:mr-8 rotate-1 group-hover:rotate-0 transition-transform duration-500 mt-4 lg:mt-8">
-                                    <p className="text-2xl md:text-3xl font-medium text-foreground/90 max-w-2xl leading-tight mb-8">
-                                        A multi-agent system designed to simulate and optimize vendor negotiations.
-                                    </p>
-                                    <ul className="flex flex-col gap-4 text-foreground/70 text-lg font-medium list-none p-0 m-0">
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Built structured prompt pipelines for consistent AI decision-making.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Designed workflow orchestration for multi-stage negotiation flows.
-                                        </li>
-                                        <li className="relative pl-6 before:content-['✦'] before:absolute before:left-0 before:text-[#7B5944] before:text-sm before:top-1 max-w-2xl">
-                                            Focused on reliability and deterministic outputs across AI interactions.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </article>
-                        </FocusProject>
-                    </FadeUpItem>
-
-                </FadeUpStagger>
-            </div>
-        </section>
-    );
+                {i < projects.length - 1 && (
+                  <div className="mt-24 h-px bg-surface-light/20" />
+                )}
+              </motion.article>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

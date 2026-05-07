@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Anton } from "next/font/google";
+import { Inter, Outfit, Fira_Code } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,15 +7,21 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const anton = Anton({
-  weight: "400",
-  variable: "--font-anton",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const firaCode = Fira_Code({
+  variable: "--font-fira",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Priyank | Portfolio",
-  description: "Personal portfolio built with Next.js and Tailwind CSS",
+  title: "Priyank Pahwa — Building production-grade systems",
+  description: "Associate Software Engineer @ Accenture | Former Systems Engineer Intern @ Infosys. Full-stack engineer bridging deep technical execution with project leadership.",
 };
 
 export default function RootLayout({
@@ -24,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${anton.variable} font-sans antialiased min-h-screen`}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.variable} ${outfit.variable} ${firaCode.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
         {children}
       </body>
     </html>

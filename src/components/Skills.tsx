@@ -1,79 +1,270 @@
-import React from 'react';
-import { FadeUp, FadeUpStagger, FadeUpItem, ParallaxText } from './Reveal';
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  Code2,
+  Server,
+  Cloud,
+  Database,
+  GitBranch,
+  Layers,
+  FileCode,
+  Globe,
+  Flame,
+  Layout,
+  ClipboardList,
+  BarChart3,
+  Users,
+  CheckCircle2,
+  Route,
+  MessageSquare,
+} from "lucide-react";
+import FadeIn, { FadeInStagger, FadeInItem } from "./FadeIn";
+import { usePortfolioMode } from "./PortfolioMode";
+
+const engineerSkills = [
+  { name: "React / Next.js", icon: Code2 },
+  { name: "TypeScript / JavaScript", icon: FileCode },
+  { name: "Spring Boot / Java", icon: Server },
+  { name: "REST API Design", icon: Globe },
+  { name: "MySQL / SQL", icon: Database },
+  { name: "Google Cloud / Firebase", icon: Cloud },
+  { name: "Git / GitHub", icon: GitBranch },
+  { name: "System Design", icon: Layers },
+  { name: "Node.js / Full Stack", icon: Flame },
+  { name: "HTML5 / CSS / Tailwind", icon: Layout },
+];
+
+const executionSkills = [
+  { name: "Agile / Scrum", icon: Route },
+  { name: "Requirements Analysis", icon: ClipboardList },
+  { name: "UAT & QA Standards", icon: CheckCircle2 },
+  { name: "Stakeholder Communication", icon: MessageSquare },
+  { name: "Feature Prioritization", icon: BarChart3 },
+  { name: "Team Leadership", icon: Users },
+];
+
+const engineerStack = [
+  { section: "Systems & Architecture", items: [
+    "REST API Design",
+    "Authentication & Authorization",
+    "Workflow Modeling",
+    "Database Design",
+    "State Management",
+    "Billing Logic",
+    "Backend Architecture",
+  ]},
+  { section: "Engineering Stack", items: [
+    "Java",
+    "Spring Boot",
+    "React",
+    "TypeScript",
+    "MySQL",
+    "Node.js",
+    "Express",
+  ]},
+  { section: "Platform & Cloud", items: [
+    "AWS Fundamentals",
+    "Deployment Pipelines",
+    "Linux",
+    "Git Workflows",
+    "CI/CD Concepts",
+    "Monitoring & Reliability",
+  ]},
+  { section: "Execution & Collaboration", items: [
+    "Technical Communication",
+    "System Walkthroughs",
+    "Cross-Functional Coordination",
+    "Architecture Presentation",
+    "Ownership-Driven Development",
+  ]},
+];
+
+const executionStack = [
+  { section: "Delivery Frameworks", items: [
+    "Agile / Scrum / Kanban",
+    "SDLC & Release Management",
+    "UAT Planning & Execution",
+    "Risk & Dependency Management",
+    "Sprint Planning & Velocity Tracking",
+  ]},
+  { section: "Product & Strategy", items: [
+    "Requirements Elicitation",
+    "Scope Definition & Control",
+    "Gap Analysis",
+    "Feature Prioritization (RICE, MoSCoW)",
+    "Roadmap Planning",
+  ]},
+  { section: "Stakeholder & Communication", items: [
+    "Executive Reporting",
+    "Cross-Functional Team Alignment",
+    "Client Relationship Management",
+    "Technical-to-Business Translation",
+    "Presentation & Demo Delivery",
+  ]},
+  { section: "Quality & Compliance", items: [
+    "UAT Standards Enforcement",
+    "Acceptance Criteria Definition",
+    "Regression Testing Coordination",
+    "Documentation & Knowledge Transfer",
+    "Post-Release Monitoring",
+  ]},
+];
 
 export default function Skills() {
-    return (
-        <section id="capabilities" className="w-full relative flex flex-col py-32 px-6 md:px-12 lg:px-24 bg-foreground/5">
-            {/* Background Faint Text */}
-            <div className="absolute top-24 left-0 w-full overflow-hidden flex justify-center pointer-events-none z-0 select-none opacity-[0.03]">
-                <ParallaxText offset={150}>
+  const { isEngineer } = usePortfolioMode();
+  const primarySkills = isEngineer ? engineerSkills : executionSkills;
+  const stackCategories = isEngineer ? engineerStack : executionStack;
+
+  return (
+    <section id="skills" className="py-32 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
+        <FadeIn>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-accent font-fira text-sm font-medium tracking-wider">
+              04
+            </span>
+            <div className="h-px flex-1 bg-surface-light/30 max-w-[60px]" />
+            <span className="text-muted text-sm font-medium tracking-wider uppercase">
+              {isEngineer ? "Engineering Stack" : "Execution Toolkit"}
+            </span>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <h2 className="font-outfit text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] mb-6">
+            {isEngineer ? "Systems & Execution" : "Strategy & Delivery"}
+          </h2>
+        </FadeIn>
+
+        <FadeIn delay={0.15}>
+          <p className="text-muted text-lg max-w-2xl mb-20">
+            {isEngineer
+              ? "I write the code and I understand why the code needs to exist. Deep technical competence combined with execution awareness."
+              : "I ship outcomes and I understand how the technology enables them. Structured delivery combined with technical fluency."}
+          </p>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <FadeIn delay={0.2}>
+            <div className="p-8 rounded-2xl bg-gradient-to-br from-surface to-surface-light/10 border border-surface-light/30">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="p-2.5 rounded-lg bg-accent/10 text-accent">
+                  <Code2 size={20} />
+                </div>
+                <h3 className="font-outfit text-xl font-bold text-foreground">
+                  {isEngineer ? "Technical Architecture" : "Project Delivery"}
+                </h3>
+              </div>
+
+              <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {primarySkills.map((skill) => (
+                  <FadeInItem key={skill.name}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, backgroundColor: "rgba(15,23,42,0.8)" }}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-surface/50 border border-surface-light/20 transition-all"
+                    >
+                      <skill.icon size={16} className={isEngineer ? "text-accent shrink-0" : "text-emerald shrink-0"} />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-foreground truncate">
+                          {skill.name}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </FadeInItem>
+                ))}
+              </FadeInStagger>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <div className="p-8 rounded-2xl bg-gradient-to-br from-surface to-surface-light/10 border border-surface-light/30">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="p-2.5 rounded-lg bg-emerald/10 text-emerald">
+                  <ClipboardList size={20} />
+                </div>
+                <h3 className="font-outfit text-xl font-bold text-foreground">
+                  {isEngineer ? "Project Delivery" : "Technical Fluency"}
+                </h3>
+              </div>
+
+              <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {primarySkills.map((skill) => (
+                  <FadeInItem key={skill.name}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, backgroundColor: "rgba(15,23,42,0.8)" }}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-surface/50 border border-surface-light/20 transition-all"
+                    >
+                      <skill.icon size={16} className={isEngineer ? "text-emerald shrink-0" : "text-accent shrink-0"} />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-foreground truncate">
+                          {skill.name}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </FadeInItem>
+                ))}
+              </FadeInStagger>
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={0.4}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {stackCategories.map((cat) => (
+              <div
+                key={cat.section}
+                className="p-6 rounded-xl bg-surface/50 border border-surface-light/30"
+              >
+                <h4 className="font-outfit font-semibold text-foreground mb-4 text-sm">
+                  {cat.section}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((item) => (
                     <span
-                        className="text-[20vw] leading-none text-foreground whitespace-nowrap inline-block"
-                        style={{ fontFamily: 'var(--font-anton)' }}
+                      key={item}
+                      className="px-3 py-1.5 rounded-full bg-surface border border-surface-light/30 text-xs font-fira text-muted hover:text-accent hover:border-accent/30 transition-all"
                     >
-                        CAPABILITIES
+                      {item}
                     </span>
-                </ParallaxText>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.5}>
+          <div className="mt-12 p-6 rounded-xl bg-surface/50 border border-surface-light/30">
+            <h4 className="font-outfit font-semibold text-foreground mb-4 text-center text-sm">
+              {isEngineer ? "Tools & Environment" : "Platforms & Collaboration"}
+            </h4>
+            <div className="flex flex-wrap justify-center gap-3">
+              {isEngineer
+                ? ["JIRA", "Git / GitHub", "Postman", "DBeaver", "VS Code", "Figma", "Vercel", "Docker"].map(
+                    (tool) => (
+                      <span
+                        key={tool}
+                        className="px-4 py-2 rounded-full bg-surface border border-surface-light/30 text-sm font-fira text-muted hover:text-accent hover:border-accent/30 transition-all"
+                      >
+                        {tool}
+                      </span>
+                    )
+                  )
+                : ["JIRA", "Confluence", "Slack", "MS Project", "Notion", "Miro", "PowerPoint", "Teams"].map(
+                    (tool) => (
+                      <span
+                        key={tool}
+                        className="px-4 py-2 rounded-full bg-surface border border-surface-light/30 text-sm font-fira text-muted hover:text-emerald hover:border-emerald/30 transition-all"
+                      >
+                        {tool}
+                      </span>
+                    )
+                  )}
             </div>
-
-            <div className="relative z-10 max-w-7xl mx-auto w-full">
-                <FadeUp>
-                    <h2
-                        className="text-6xl md:text-8xl text-foreground font-bold uppercase mb-24 tracking-wide opacity-80 border-b-2 border-foreground/10 pb-8"
-                        style={{ fontFamily: 'var(--font-anton)' }}
-                    >
-                        Capabilities
-                    </h2>
-                </FadeUp>
-
-                <FadeUpStagger className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 lg:gap-16">
-                    {/* Column 1 */}
-                    <FadeUpItem className="flex flex-col gap-8">
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground border-l-4 border-[#7B5944] pl-4 uppercase tracking-widest">
-                            Product & Execution
-                        </h3>
-                        <ul className="flex flex-col gap-4 text-foreground/90 text-lg md:text-xl font-medium list-none p-0 m-0">
-                            <li>Product Strategy</li>
-                            <li>Agile Delivery</li>
-                            <li>Requirements Gathering</li>
-                            <li>Cross-functional Leadership</li>
-                            <li>User-Centric Design</li>
-                            <li>Go-to-Market Strategy</li>
-                        </ul>
-                    </FadeUpItem>
-
-                    {/* Column 2 */}
-                    <FadeUpItem className="flex flex-col gap-8 md:border-l md:border-foreground/10 md:pl-8 lg:pl-16">
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground border-l-4 border-[#7B5944] pl-4 uppercase tracking-widest">
-                            Systems & Architecture
-                        </h3>
-                        <ul className="flex flex-col gap-4 text-foreground/90 text-lg md:text-xl font-medium list-none p-0 m-0">
-                            <li>System Design</li>
-                            <li>Enterprise Architecture</li>
-                            <li>Cloud Infrastructure</li>
-                            <li>API Integration</li>
-                            <li>Data Modeling</li>
-                            <li>Scalability Planning</li>
-                        </ul>
-                    </FadeUpItem>
-
-                    {/* Column 3 */}
-                    <FadeUpItem className="flex flex-col gap-8 md:border-l md:border-foreground/10 md:pl-8 lg:pl-16">
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground border-l-4 border-[#7B5944] pl-4 uppercase tracking-widest">
-                            Tech Stack
-                        </h3>
-                        <ul className="flex flex-col gap-4 text-foreground/90 text-lg md:text-xl font-medium list-none p-0 m-0">
-                            <li>React & Next.js</li>
-                            <li>TypeScript</li>
-                            <li>Node.js / Express</li>
-                            <li>Java</li>
-                            <li>Google Cloud Platform</li>
-                            <li>Firebase</li>
-                            <li>Docker & CI/CD</li>
-                        </ul>
-                    </FadeUpItem>
-                </FadeUpStagger>
-            </div>
-        </section>
-    );
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
 }

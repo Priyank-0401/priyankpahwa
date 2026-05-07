@@ -1,92 +1,131 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { FadeUpStagger, FadeUpItem } from './Reveal';
+import { motion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
+import Image from "next/image";
+import { usePortfolioMode } from "./PortfolioMode";
 
 export default function Hero() {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+  const { isEngineer } = usePortfolioMode();
 
-    const smoothMouseX = useSpring(mouseX, { damping: 50, stiffness: 400 });
-    const smoothMouseY = useSpring(mouseY, { damping: 50, stiffness: 400 });
+  const engineerContent = {
+    headline: "Building systems that survive real-world usage.",
+    subheadline: "Full Stack Engineer focused on scalable workflows and execution.",
+    description:
+      "I don't just build features. I understand systems. Enterprise platforms across AI, fintech, logistics, and subscription systems — with a focus on architecture, workflows, reliability, and execution.",
+    highlights: [
+      "React / TypeScript / Next.js",
+      "Spring Boot / Java / REST APIs",
+      "MySQL / System Design / State Machines",
+      "Google Cloud / Firebase / DevOps",
+    ],
+    cta: "Explore Architecture",
+    microHumor: "Currently debugging life decisions and backend workflows.",
+  };
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const { clientX, clientY } = e;
-        const { innerWidth, innerHeight } = window;
-        const x = (clientX / innerWidth) - 0.5; // Range: -0.5 to 0.5
-        const y = (clientY / innerHeight) - 0.5;
-        mouseX.set(x);
-        mouseY.set(y);
-    };
+  const executionContent = {
+    headline: "Leading technical execution.",
+    subheadline: "Shipping outcomes, not just features.",
+    description:
+      "Technical delivery lead who bridges engineering depth with execution excellence. I scope requirements, manage stakeholder communication, enforce UAT standards, and ensure zero-surprise releases.",
+    highlights: [
+      "Agile / Scrum / SDLC",
+      "Scope & Requirements Analysis",
+      "UAT Standards & Compliance",
+      "Stakeholder Communication",
+    ],
+    cta: "See Execution",
+    microHumor: "I trust deadlines more than optimism. But I hit both.",
+  };
 
-    // Very subtle movements
-    const stripeX = useTransform(smoothMouseX, [-0.5, 0.5], ['-15%', '15%']);
-    const textX = useTransform(smoothMouseX, [-0.5, 0.5], ['-2%', '2%']);
-    const textY = useTransform(smoothMouseY, [-0.5, 0.5], ['-2%', '2%']);
+  const content = isEngineer ? engineerContent : executionContent;
 
-    return (
-        <section onMouseMove={handleMouseMove} className="relative h-screen w-full overflow-hidden flex flex-col justify-between">
-            {/* Layer 1: The Background Stripe */}
-            <motion.div
-                style={{ x: stripeX, translateX: '-50%' }}
-                className="absolute inset-y-0 left-1/2 w-1/3 md:w-1/4 bg-[#7B5944] z-0 border-l border-r border-[#1A1C17]/10"
-            />
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center px-6 md:px-12 overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(56,189,248,0.08),_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(52,211,153,0.05),_transparent_50%)]" />
 
-            {/* Layer 2: The Massive Typography */}
-            <FadeUpStagger className="absolute top-1/2 -translate-y-1/2 w-full text-center z-10 flex flex-col pointer-events-none">
-                <FadeUpItem>
-                    <motion.h1
-                        className="text-[18vw] leading-[0.8] uppercase text-foreground mix-blend-normal opacity-90 m-0 p-0 tracking-tighter hover:text-[#7B5944] hover:-skew-x-6 hover:scale-[1.01] transition-all duration-300 pointer-events-auto cursor-default origin-bottom"
-                        style={{ fontFamily: 'var(--font-anton)', x: textX, y: textY }}
-                    >
-                        PRIYANK PAHWA
-                    </motion.h1>
-                </FadeUpItem>
-                <FadeUpItem>
-                    <motion.h2
-                        className="text-[11vw] leading-[0.8] uppercase text-foreground mix-blend-normal opacity-70 m-0 p-0 tracking-tighter"
-                        style={{ fontFamily: 'var(--font-anton)', x: textX, y: textY }}
-                    >
-                        PROJECT MANAGER
-                    </motion.h2>
-                </FadeUpItem>
-            </FadeUpStagger>
+      <div className="relative z-10 max-w-6xl mx-auto w-full pt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          <div className="flex items-center gap-6 mb-8">
+            <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-surface-light/50 shadow-sm">
+              <Image
+                src="/Infosys_logo.svg.png"
+                alt="Infosys"
+                width={80}
+                height={24}
+                className="h-5 w-auto transition-all"
+              />
+              <span className="text-muted text-xs">+</span>
+              <Image
+                src="/Accenture.svg.png"
+                alt="Accenture"
+                width={80}
+                height={24}
+                className="h-5 w-auto transition-all"
+              />
+            </div>
+          </div>
 
-            {/* Layer 3: Side Content (Left) */}
-            <FadeUpStagger className="hidden md:flex absolute left-8 bottom-32 z-30 max-w-xs flex-col gap-4">
-                <FadeUpItem>
-                    <p className="text-sm font-semibold tracking-wide border-t border-foreground pt-4 leading-relaxed mix-blend-exclusion text-foreground opacity-90 pointer-events-none">
-                        AS A TECHNICAL PRODUCT MANAGER, I FOCUS ON PRODUCING TOP-NOTCH, SHIPPABLE SYSTEMS AND IMPACTFUL AI EXPERIENCES.
-                    </p>
-                </FadeUpItem>
-                <FadeUpItem>
-                    <a href="mailto:priyankpahwa41@gmail.com" className="group flex items-center gap-2 text-sm font-bold uppercase hover:opacity-75 transition-opacity underline decoration-2 underline-offset-4 w-fit">
-                        Let's talk
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">↗</span>
-                    </a>
-                </FadeUpItem>
-            </FadeUpStagger>
+          <h1 className="font-outfit text-5xl md:text-7xl lg:text-8xl font-bold text-foreground leading-[1.05] mb-4">
+            {content.headline}
+          </h1>
+          <h2 className="font-outfit text-2xl md:text-4xl lg:text-5xl font-medium text-muted leading-[1.1] mb-8">
+            {content.subheadline}
+          </h2>
 
-            {/* Layer 4: Side Content (Right) */}
-            <FadeUpStagger className="hidden lg:flex absolute right-8 bottom-32 z-30 items-center gap-6 max-w-md pointer-events-none">
-                <FadeUpItem>
-                    <div
-                        className="w-32 h-32 shrink-0 rounded-full bg-foreground text-[#1A1C17] flex items-center justify-center text-6xl border-4 border-[#1A1C17] -rotate-12 shadow-2xl"
-                        style={{ fontFamily: 'var(--font-anton)' }}
-                    >
-                        01
-                    </div>
-                </FadeUpItem>
-                <FadeUpItem>
-                    <p className="text-sm font-bold tracking-wide uppercase leading-relaxed text-foreground mix-blend-overlay">
-                        A CUTTING-EDGE STRATEGIST DESIGNED TO REVOLUTIONIZE THE WAY ENTERPRISES INTERACT WITH AUTONOMOUS ECOSYSTEMS.
-                    </p>
-                </FadeUpItem>
-            </FadeUpStagger>
+          <p className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed mb-10">
+            {content.description}
+          </p>
 
-        </section>
-    );
+          <div className="flex flex-wrap gap-3 mb-6">
+            {content.highlights.map((item, i) => (
+              <motion.span
+                key={item}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 + i * 0.08 }}
+                className="px-4 py-2 rounded-full bg-surface border border-surface-light/50 text-sm font-medium text-foreground/80 font-fira"
+              >
+                {item}
+              </motion.span>
+            ))}
+          </div>
+
+          <p className="text-xs text-muted/50 italic font-fira mb-16">
+            {content.microHumor}
+          </p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="flex justify-center"
+          >
+            <a
+              href="#case-study"
+              className="flex flex-col items-center gap-2 text-muted hover:text-accent transition-colors"
+            >
+              <span className="text-xs font-medium tracking-widest uppercase">
+                {content.cta}
+              </span>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ArrowDown size={20} />
+              </motion.div>
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
 }
