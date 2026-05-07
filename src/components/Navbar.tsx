@@ -44,7 +44,7 @@ export default function Navbar() {
           className="flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
           <img
-            src="/logo.png"
+            src="logo.png"
             alt="Priyank Pahwa"
             className="h-10 w-10 rounded-full"
           />
