@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Download, Code2, ClipboardList } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { usePortfolioMode } from "./PortfolioMode";
 
 const navLinks = [
@@ -34,22 +35,39 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16">
-        <a
-          href="#hero"
-          className="font-outfit text-xl font-bold tracking-tight text-foreground hover:text-accent transition-colors"
+        <button
+          onClick={() => {
+            const element = document.querySelector("#hero");
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
-          PP
-        </a>
+          <Image
+            src="/logo.png"
+            alt="Priyank Pahwa"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+        </button>
 
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.href}
-              href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.querySelector(link.href);
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className="text-sm font-medium text-muted hover:text-foreground transition-colors tracking-wide"
             >
               {link.label}
-            </a>
+            </button>
           ))}
 
           <div className="flex items-center bg-surface rounded-full p-1 border border-surface-light/40">
@@ -126,14 +144,20 @@ export default function Navbar() {
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium text-muted hover:text-foreground transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                    const element = document.querySelector(link.href);
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="text-lg font-medium text-muted hover:text-foreground transition-colors text-left"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
               <a
                 href="/Priyank_Pahwa_Project_Management_Resume.pdf"
