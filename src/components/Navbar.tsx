@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Download, Code2, ClipboardList } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { usePortfolioMode } from "./PortfolioMode";
 
 const navLinks = [
@@ -44,12 +43,10 @@ export default function Navbar() {
           }}
           className="flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
-          <Image
+          <img
             src="/logo.png"
             alt="Priyank Pahwa"
-            width={40}
-            height={40}
-            className="rounded-full"
+            className="h-10 w-10 rounded-full"
           />
         </button>
 

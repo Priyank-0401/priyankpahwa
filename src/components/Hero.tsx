@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import Image from "next/image";
 import { usePortfolioMode } from "./PortfolioMode";
 
 export default function Hero() {
@@ -56,19 +55,15 @@ export default function Hero() {
         >
           <div className="flex items-center gap-6 mb-8">
             <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-surface-light/50 shadow-sm">
-              <Image
+              <img
                 src="/Infosys_logo.svg.png"
                 alt="Infosys"
-                width={80}
-                height={24}
                 className="h-5 w-auto transition-all"
               />
               <span className="text-muted text-xs">+</span>
-              <Image
+              <img
                 src="/Accenture.svg.png"
                 alt="Accenture"
-                width={80}
-                height={24}
                 className="h-5 w-auto transition-all"
               />
             </div>
