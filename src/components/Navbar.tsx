@@ -44,7 +44,7 @@ export default function Navbar() {
           className="flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
           <img
-            src="/logo.png"
+            src="/priyankpahwa/logo.png"
             alt="Priyank Pahwa"
             className="h-10 w-10 rounded-full"
           />
@@ -93,7 +93,7 @@ export default function Navbar() {
           </div>
 
           <a
-            href="/Priyank_Pahwa_Project_Management_Resume.pdf"
+            href="/priyankpahwa/Priyank_Pahwa_Project_Management_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold hover:bg-accent/20 transition-all border border-accent/20"
@@ -157,7 +157,7 @@ export default function Navbar() {
                 </button>
               ))}
               <a
-                href="/Priyank_Pahwa_Project_Management_Resume.pdf"
+                href="/priyankpahwa/Priyank_Pahwa_Project_Management_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-3 rounded-lg bg-accent/10 text-accent font-semibold hover:bg-accent/20 transition-all border border-accent/20 mt-2"
