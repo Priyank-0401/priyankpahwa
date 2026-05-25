@@ -103,6 +103,15 @@ const PROJECT_DATA: Record<string, any> = {
   }
 };
 
+export function generateStaticParams() {
+  return [
+    { slug: 'pharmafleet' },
+    { slug: 'seriva' },
+    { slug: 'wepay' },
+    { slug: 'arsenal' }
+  ];
+}
+
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug.toLowerCase();
