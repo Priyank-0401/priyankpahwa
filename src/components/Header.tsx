@@ -26,7 +26,7 @@ export function Header() {
       {/* Right Zone */}
       <div className="flex justify-end">
         <a
-          href="mailto:priyankpahwa@example.com"
+          href="mailto:priyankpahwa41@gmail.com"
           className="group relative flex items-center justify-center h-12 px-6 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-100 overflow-hidden cursor-pointer"
         >
           <span className="relative z-10 flex items-center gap-2 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-x-2">
