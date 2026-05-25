@@ -1,45 +1,25 @@
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
 
 @theme inline {
-  --color-background: #09090B;
-  --color-foreground: #F8FAFC;
-  --color-accent: #38BDF8;
-  --color-emerald: #34D399;
-  --color-muted: #64748B;
-  --color-surface: #0F172A;
-  --color-surface-light: #1E293B;
-  --font-outfit: var(--font-outfit);
-  --font-inter: var(--font-inter);
-  --font-fira: var(--font-fira);
-
-  --animate-pulse-slow: pulse-slow 3s ease-in-out infinite;
-  --animate-fade-up: fade-up 0.6s ease-out forwards;
-
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-900: #171717;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  color: var(--color-foreground);
-  background: var(--color-background);
-  overflow-x: hidden;
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+  overscroll-behavior: none;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .font-outfit {
-    font-family: var(--font-outfit), sans-serif;
-  }
-  .font-fira {
-    font-family: var(--font-fira), monospace;
-  }
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

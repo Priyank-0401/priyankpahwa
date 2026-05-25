@@ -1,31 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, Fira_Code } from "next/font/google";
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
-const inter = Inter({
-  variable: "--font-inter",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const firaCode = Fira_Code({
-  variable: "--font-fira",
-  subsets: ["latin"],
-  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Priyank Pahwa — Building production-grade systems",
-  description: "Associate Software Engineer @ Accenture | Former Systems Engineer Intern @ Infosys. Full-stack engineer bridging deep technical execution with project leadership.",
+  title: "Priyank Pahwa | Technical Strategist & Product Builder",
+  description: "Portfolio of Priyank Pahwa",
   icons: {
-    icon: "/priyankpahwa/logo.png",
-    shortcut: "/priyankpahwa/logo.png",
-    apple: "/priyankpahwa/logo.png",
+    icon: '/logo.png',
   },
 };
 
@@ -35,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${outfit.variable} ${firaCode.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
-        {children}
+    <html lang="en">
+      <body className={`${manrope.variable} ${jetbrainsMono.variable} font-sans antialiased bg-neutral-900 text-neutral-100 min-h-screen flex flex-col`}>
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
